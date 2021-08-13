@@ -50,11 +50,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Integration' ) ) {
 						'value'       => '',
 						'placeholder' => null,
 						'element'     => 'control',
-						'options'     => [
-							'youtube'     => __( 'Youtube', 'jet-woo-builder' ),
-							'vimeo'       => __( 'Vimeo', 'jet-woo-builder' ),
-							'self_hosted' => __( 'Self Hosted', 'jet-woo-builder' ),
-						],
+						'options'     => $this->get_custom_badges_list(),
 						'label'       => __( 'Select Product Budgets:', 'jet-woo-builder' ),
 					],
 				],
@@ -69,7 +65,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Integration' ) ) {
 		 */
 		public function get_builder() {
 
-			$builder_data = jet_woo_product_gallery()->module_loader->get_included_module_data( 'cherry-x-interface-builder.php' );
+			$builder_data = jet_woo_builder_custom_product_badges()->module_loader->get_included_module_data( 'cherry-x-interface-builder.php' );
 
 			return new CX_Interface_Builder(
 				[
@@ -77,6 +73,21 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Integration' ) ) {
 					'url'  => $builder_data['url'],
 				]
 			);
+
+		}
+
+		/**
+		 * Returns list of badges
+		 *
+		 * @return mixed|void
+		 */
+		public function get_custom_badges_list() {
+
+			return apply_filters( 'jet-woo-builder-cpb/integration/badges', [
+				'popular'    => __( 'Popular', 'jet-woo-builder' ),
+				'bestseller' => __( 'Bestseller', 'jet-woo-builder' ),
+				'new'        => __( 'New', 'jet-woo-builder' ),
+			] );
 
 		}
 

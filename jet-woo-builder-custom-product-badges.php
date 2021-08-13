@@ -74,8 +74,8 @@ if ( ! class_exists( 'Jet_Woo_Builder_Custom_Product_Badges' ) ) {
 
 			$this->module_loader = new Jet_Woo_Builder_Custom_Product_Badges_CX_Loader(
 				[
-					plugins_url( 'includes/modules/interface-builder/cherry-x-interface-builder.php', CPB_PLUGIN_URL ),
-					plugins_url( 'includes/modules/post-meta/cherry-x-post-meta.php', CPB_PLUGIN_URL ),
+					$this->plugin_path( 'includes/modules/interface-builder/cherry-x-interface-builder.php' ),
+					$this->plugin_path( 'includes/modules/post-meta/cherry-x-post-meta.php' ),
 				]
 			);
 
@@ -86,8 +86,10 @@ if ( ! class_exists( 'Jet_Woo_Builder_Custom_Product_Badges' ) ) {
 		 */
 		public function init() {
 			require $this->plugin_path( 'includes/fields-integration.php' );
+			require $this->plugin_path( 'includes/fields-handling.php' );
 
 			jet_woo_builder_fields_integration()->init();
+			jet_woo_builder_fields_handling()->init();
 		}
 
 		/**
@@ -128,17 +130,17 @@ if ( ! class_exists( 'Jet_Woo_Builder_Custom_Product_Badges' ) ) {
 
 }
 
-if ( ! function_exists( 'jet_woo_builder_cpb' ) ) {
+if ( ! function_exists( 'jet_woo_builder_custom_product_badges' ) ) {
 
 	/**
 	 * Returns instance of the plugin class.
 	 *
 	 * @return object
 	 */
-	function jet_woo_builder_cpb() {
+	function jet_woo_builder_custom_product_badges() {
 		return Jet_Woo_Builder_Custom_Product_Badges::get_instance();
 	}
 
 }
 
-jet_woo_builder_cpb();
+jet_woo_builder_custom_product_badges();

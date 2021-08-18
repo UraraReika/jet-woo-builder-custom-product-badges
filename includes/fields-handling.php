@@ -1,7 +1,6 @@
 <?php
 
 // If this file is called directly, abort.
-use Elementor\Repeater;
 use Elementor\Controls_Manager;
 
 if ( ! defined( 'WPINC' ) ) {
@@ -33,6 +32,8 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 			add_action( 'elementor/element/jet-woo-products/section_general/after_section_end', [ $this, 'register_custom_badge_controls' ], 10, 2 );
 			// handle badge output
 			add_filter( 'jet-woo-builder/template-functions/product_sale_flash', [ $this, 'get_custom_products_badges' ], 10, 2 );
+			// add custom badges settings to providers settings list
+			add_filter( 'jet-smart-filters/providers/jet-woo-products-grid/settings-list', [ $this, 'add_custom_badges_settings_to_list' ] );
 
 		}
 
@@ -155,6 +156,24 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 			}
 
 			return $html;
+
+		}
+
+		/**
+		 * Returns merged custom icon settings with JetSmartFilters providers settings list
+		 *
+		 * @param $list
+		 *
+		 * @return array
+		 */
+		public function add_custom_badges_settings_to_list( $list ) {
+
+			$custom_icon_settings = [
+				'enable_custom_badges',
+				'enable_default_badge',
+			];
+
+			return array_merge( $list, $custom_icon_settings );
 
 		}
 

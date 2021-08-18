@@ -1,6 +1,9 @@
 <?php
 
 // If this file is called directly, abort.
+use Elementor\Repeater;
+use Elementor\Controls_Manager;
+
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
@@ -25,7 +28,103 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 		 * Constructor for the class
 		 */
 		public function init() {
-			add_filter( 'jet-woo-builder/template-functions/product_sale_flash', [ $this, 'get_custom_products_badges' ] );
+
+			// register controls for Products Grid widget
+			add_action( 'elementor/element/jet-woo-products/section_general/after_section_end', [ $this, 'register_custom_badge_controls' ], 10, 2 );
+			// handle badge output
+			add_filter( 'jet-woo-builder/template-functions/product_sale_flash', [ $this, 'get_custom_products_badges' ], 10, 2 );
+
+		}
+
+		/**
+		 * Register custom Add to Cart icon controls
+		 *
+		 * @param $obj
+		 */
+		public function register_custom_badge_controls( $obj ) {
+
+			$badges = jet_woo_builder_fields_integration()->get_custom_badges_list();
+
+			$obj->start_controls_section(
+				'section_custom_badges',
+				[
+					'label' => __( 'Custom Badges', 'jet-woo-builder' ),
+				]
+			);
+
+			$obj->add_control(
+				'enable_custom_badges',
+				[
+					'label' => __( 'Enable Custom Badges', 'jet-woo-builder' ),
+					'type'  => Controls_Manager::SWITCHER,
+				]
+			);
+
+			$obj->add_control(
+				'enable_default_badge',
+				[
+					'label'     => __( 'Enable Default Badge', 'jet-woo-builder' ),
+					'type'      => Controls_Manager::SWITCHER,
+					'default'   => 'yes',
+					'condition' => [
+						'enable_custom_badges' => 'yes',
+					],
+				]
+			);
+
+			foreach ( $badges as $key => $value ) {
+				$obj->add_control(
+					$key . '_hr',
+					[
+						'type'      => Controls_Manager::DIVIDER,
+						'condition' => [
+							'enable_custom_badges' => 'yes',
+						],
+					]
+				);
+
+				$obj->add_control(
+					$key . '_styles_heading',
+					[
+						'label'     => __( $value, 'jet-woo-builder' ),
+						'type'      => Controls_Manager::HEADING,
+						'condition' => [
+							'enable_custom_badges' => 'yes',
+						],
+					]
+				);
+
+				$obj->add_control(
+					$key . '_badge_color',
+					[
+						'label'     => __( 'Color', 'jet-woo-builder' ),
+						'type'      => Controls_Manager::COLOR,
+						'selectors' => [
+							'{{WRAPPER}} .jet-woo-products .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
+						],
+						'condition' => [
+							'enable_custom_badges' => 'yes',
+						],
+					]
+				);
+
+				$obj->add_control(
+					$key . '_badge_bg_color',
+					[
+						'label'     => __( 'Background color', 'jet-woo-builder' ),
+						'type'      => Controls_Manager::COLOR,
+						'selectors' => [
+							'{{WRAPPER}} .jet-woo-products .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
+						],
+						'condition' => [
+							'enable_custom_badges' => 'yes',
+						],
+					]
+				);
+			}
+
+			$obj->end_controls_section();
+
 		}
 
 		/**
@@ -35,7 +134,15 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 		 *
 		 * @return mixed|string
 		 */
-		public function get_custom_products_badges( $html ) {
+		public function get_custom_products_badges( $html, $settings ) {
+
+			if ( 'yes' !== $settings['enable_custom_badges'] ) {
+				return $html;
+			}
+
+			if ( 'yes' !== $settings['enable_default_badge'] ) {
+				$html = '';
+			}
 
 			global $product;
 

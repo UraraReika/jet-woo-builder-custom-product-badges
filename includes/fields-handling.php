@@ -30,10 +30,13 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 
 			// register controls for Products Grid widget
 			add_action( 'elementor/element/jet-woo-products/section_general/after_section_end', [ $this, 'register_custom_badge_controls' ], 10, 2 );
+			add_action( 'elementor/element/jet-woo-builder-archive-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ], 10, 2 );
 			// handle badge output
 			add_filter( 'jet-woo-builder/template-functions/product_sale_flash', [ $this, 'get_custom_products_badges' ], 10, 2 );
 			// add custom badges settings to providers settings list
 			add_filter( 'jet-smart-filters/providers/jet-woo-products-grid/settings-list', [ $this, 'add_custom_badges_settings_to_list' ] );
+			// add custom badges settings to macros settings list
+			add_filter( 'jet-woo-builder/jet-woo-builder-archive-sale-badge/macros-settings', [ $this, 'add_custom_badges_settings_to_macros_settings' ], 10, 2 );
 
 		}
 
@@ -101,7 +104,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 						'label'     => __( 'Color', 'jet-woo-builder' ),
 						'type'      => Controls_Manager::COLOR,
 						'selectors' => [
-							'{{WRAPPER}} .jet-woo-products .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
+							'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'enable_custom_badges' => 'yes',
@@ -115,7 +118,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 						'label'     => __( 'Background color', 'jet-woo-builder' ),
 						'type'      => Controls_Manager::COLOR,
 						'selectors' => [
-							'{{WRAPPER}} .jet-woo-products .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
 						],
 						'condition' => [
 							'enable_custom_badges' => 'yes',
@@ -175,6 +178,21 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 
 			return array_merge( $list, $custom_icon_settings );
 
+		}
+
+		/**
+		 * Returns updated macros settings to widget.
+		 *
+		 * @param $list
+		 * @param $settings
+		 *
+		 * @return mixed
+		 */
+		public function add_custom_badges_settings_to_macros_settings( $list, $settings ) {
+			$list['enable_custom_badges'] = isset( $settings['enable_custom_badges'] ) ? $settings['enable_custom_badges'] : '';
+			$list['enable_default_badge'] = isset( $settings['enable_default_badge'] ) ? $settings['enable_default_badge'] : '';
+
+			return $list;
 		}
 
 		/**

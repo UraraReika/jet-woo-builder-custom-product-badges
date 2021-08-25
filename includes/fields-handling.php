@@ -77,6 +77,8 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 			);
 
 			foreach ( $badges as $key => $value ) {
+				$key = strtolower( str_replace( ' ', '-', $key ) );
+
 				$obj->add_control(
 					$key . '_hr',
 					[
@@ -104,7 +106,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 						'label'     => __( 'Color', 'jet-woo-builder' ),
 						'type'      => Controls_Manager::COLOR,
 						'selectors' => [
-							'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
+							'{{WRAPPER}} div.jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
 						],
 						'condition' => [
 							'enable_custom_badges' => 'yes',
@@ -118,7 +120,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 						'label'     => __( 'Background color', 'jet-woo-builder' ),
 						'type'      => Controls_Manager::COLOR,
 						'selectors' => [
-							'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
+							'{{WRAPPER}} div.jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
 						],
 						'condition' => [
 							'enable_custom_badges' => 'yes',
@@ -154,7 +156,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 
 			if ( $badges ) {
 				foreach ( $badges as $badge ) {
-					$html .= sprintf( '<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $badge, ucfirst( $badge ) );
+					$html .= sprintf( '<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', strtolower( str_replace( ' ', '-', $badge ) ), $badge );
 				}
 			}
 

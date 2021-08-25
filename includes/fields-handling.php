@@ -23,6 +23,8 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 		 */
 		private static $instance = null;
 
+		public $injection_status = false;
+
 		/**
 		 * Constructor for the class
 		 */
@@ -32,6 +34,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 			add_action( 'elementor/element/jet-woo-products/section_general/after_section_end', [ $this, 'register_custom_badge_controls' ], 10, 2 );
 			add_action( 'elementor/element/jet-woo-builder-archive-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ], 10, 2 );
 			// handle badge output
+			add_filter( 'jet-woo-builder/template-functions/product_sale_flash/injection', [ $this, 'enable_custom_badge_injection' ], 10, 2 );
 			add_filter( 'jet-woo-builder/template-functions/product_sale_flash', [ $this, 'get_custom_products_badges' ], 10, 2 );
 			// add custom badges settings to providers settings list
 			add_filter( 'jet-smart-filters/providers/jet-woo-products-grid/settings-list', [ $this, 'add_custom_badges_settings_to_list' ] );
@@ -146,11 +149,11 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 				return $html;
 			}
 
-			if ( 'yes' !== $settings['enable_default_badge'] ) {
+			global $product;
+
+			if ( 'yes' !== $settings['enable_default_badge'] || ( ! $product->is_on_sale() && $this->injection_status ) ) {
 				$html = '';
 			}
-
-			global $product;
 
 			$badges = get_post_field( '_jet_woo_builder_badges', $product->get_id() );
 
@@ -161,6 +164,26 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 			}
 
 			return $html;
+
+		}
+
+		/**
+		 * Returns custom badge injections status to handling output function.
+		 *
+		 * @param $status
+		 * @param $settings
+		 *
+		 * @return bool|mixed
+		 */
+		public function enable_custom_badge_injection( $status, $settings ) {
+
+			if ( 'yes' === $settings['enable_custom_badges'] ) {
+				$status = true;
+			}
+
+			$this->injection_status = $status;
+
+			return $status;
 
 		}
 

@@ -51,7 +51,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Integration' ) ) {
 						'placeholder' => null,
 						'element'     => 'control',
 						'options'     => $this->get_custom_badges_list(),
-						'label'       => __( 'Select Product Budgets:', 'jet-woo-builder' ),
+						'label'       => __( 'Select Product Badges:', 'jet-woo-builder' ),
 					],
 				],
 			] );

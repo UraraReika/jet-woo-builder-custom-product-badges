@@ -137,7 +137,7 @@ if ( ! class_exists( 'Jet_Woo_Builder_Fields_Handling' ) ) {
 		}
 
 		/**
-		 * Add custom budges to products flash badges.
+		 * Add custom badges to products flash badges.
 		 *
 		 * @param $html
 		 *

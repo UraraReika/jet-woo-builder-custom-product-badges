@@ -32,12 +32,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if ( ! class_exists( 'Jet_Woo_Builder_Custom_Product_Badges_CX_Loader' ) ) {
+if ( ! class_exists( 'JWB_Custom_Product_Badges_CX_Loader' ) ) {
 
-	/**
-	 * Define Jet_Woo_Builder_Custom_Product_Badges_CX_Loader class
-	 */
-	class Jet_Woo_Builder_Custom_Product_Badges_CX_Loader {
+	class JWB_Custom_Product_Badges_CX_Loader {
 
 		/**
 		 * Key for object cache where are stored information about all modules in current environment

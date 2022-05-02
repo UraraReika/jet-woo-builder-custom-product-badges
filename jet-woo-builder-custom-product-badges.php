@@ -1,146 +1,26 @@
 <?php
 /**
  * Plugin Name: JetWooBuilder - Custom Product Badges
- * Plugin URI:
- * Description:
+ * Plugin URI: https://github.com/UraraReika/jet-woo-builder-custom-product-badges
+ * Description: Custom Product Badges has it all: create and manage products badges, output in multiple widgets, style badges separately and more.
  * Version:     1.0.0
  * Author:      Crocoblock
  * Author URI:  https://crocoblock.com/
- * Text Domain: jet-woo-builder
+ * Text Domain: jwb-custom-product-badges
  * License:     GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path: /languages
  */
 
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
-// If class `Jet_Woo_Builder` doesn't exists yet.
-if ( ! class_exists( 'Jet_Woo_Builder_Custom_Product_Badges' ) ) {
+define( 'JWB_CUSTOM_PRODUCT_BUDGES_VERSION', '1.0.0' );
 
-	/**
-	 * Sets up and initializes the plugin.
-	 */
-	class Jet_Woo_Builder_Custom_Product_Badges {
+define( 'JWB_CUSTOM_PRODUCT_BUDGES__FILE__', __FILE__ );
+define( 'JWB_CUSTOM_PRODUCT_BUDGES_PLUGIN_BASE', plugin_basename( JWB_CUSTOM_PRODUCT_BUDGES__FILE__ ) );
+define( 'JWB_CUSTOM_PRODUCT_BUDGES_PATH', plugin_dir_path( JWB_CUSTOM_PRODUCT_BUDGES__FILE__ ) );
+define( 'JWB_CUSTOM_PRODUCT_BUDGES_URL', plugins_url( '/', JWB_CUSTOM_PRODUCT_BUDGES__FILE__ ) );
 
-		/**
-		 * A reference to an instance of this class.
-		 *
-		 * @access private
-		 * @var    object
-		 */
-		private static $instance = null;
-
-		/**
-		 * Holder for base plugin path
-		 *
-		 * @since  1.0.0
-		 * @access private
-		 * @var    string
-		 */
-		private $plugin_path = null;
-
-		/**
-		 * Plugin properties
-		 */
-		public $module_loader;
-
-		/**
-		 * Sets up needed actions/filters for the plugin to initialize.
-		 *
-		 * @return void
-		 * @access public
-		 */
-		public function __construct() {
-
-			define( 'CPB_PLUGIN_URL', __FILE__ );
-
-			// Load the core functions/classes required by the rest of the plugin.
-			add_action( 'after_setup_theme', [ $this, 'module_loader' ], -20 );
-
-			// Load files.
-			add_action( 'init', [ $this, 'init' ], -999 );
-
-		}
-
-		/**
-		 * Load plugin framework
-		 */
-		public function module_loader() {
-
-			require $this->plugin_path( 'includes/modules/loader.php' );
-
-			$this->module_loader = new Jet_Woo_Builder_Custom_Product_Badges_CX_Loader(
-				[
-					$this->plugin_path( 'includes/modules/interface-builder/cherry-x-interface-builder.php' ),
-					$this->plugin_path( 'includes/modules/post-meta/cherry-x-post-meta.php' ),
-				]
-			);
-
-		}
-
-		/**
-		 * Manually init required modules
-		 */
-		public function init() {
-			require $this->plugin_path( 'includes/fields-integration.php' );
-			require $this->plugin_path( 'includes/fields-handling.php' );
-
-			jet_woo_builder_fields_integration()->init();
-			jet_woo_builder_fields_handling()->init();
-		}
-
-		/**
-		 * Returns path to file or dir inside plugin folder
-		 *
-		 * @param string $path Path inside plugin dir.
-		 *
-		 * @return string
-		 */
-		public function plugin_path( $path = null ) {
-
-			if ( ! $this->plugin_path ) {
-				$this->plugin_path = trailingslashit( plugin_dir_path( __FILE__ ) );
-			}
-
-			return $this->plugin_path . $path;
-
-		}
-
-		/**
-		 * Returns the instance.
-		 *
-		 * @return object
-		 * @access public
-		 */
-		public static function get_instance() {
-
-			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
-				self::$instance = new self;
-			}
-
-			return self::$instance;
-
-		}
-
-	}
-
-}
-
-if ( ! function_exists( 'jet_woo_builder_custom_product_badges' ) ) {
-
-	/**
-	 * Returns instance of the plugin class.
-	 *
-	 * @return object
-	 */
-	function jet_woo_builder_custom_product_badges() {
-		return Jet_Woo_Builder_Custom_Product_Badges::get_instance();
-	}
-
-}
-
-jet_woo_builder_custom_product_badges();
+require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/plugin.php';

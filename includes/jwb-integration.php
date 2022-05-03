@@ -100,7 +100,7 @@ class JWB_Integration {
 					'label'     => __( 'Color', 'jet-woo-builder' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} div.jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
+						'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
 					],
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -114,7 +114,7 @@ class JWB_Integration {
 					'label'     => __( 'Background color', 'jet-woo-builder' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} div.jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
 					],
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -178,7 +178,7 @@ class JWB_Integration {
 			$html = '';
 		}
 
-		$badges = get_post_field( '_jet_woo_builder_badges', $product->get_id() );
+		$badges = get_post_meta( $product->get_id() , '_jet_woo_builder_badges', true );
 
 		if ( $badges ) {
 			foreach ( $badges as $badge ) {

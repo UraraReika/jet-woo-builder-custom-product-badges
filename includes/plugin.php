@@ -96,12 +96,10 @@ class Plugin {
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/loader.php';
 
-		$this->framework = new \JWB_Custom_Product_Badges_CX_Loader(
-			[
-				JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/interface-builder/cherry-x-interface-builder.php',
-				JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/post-meta/cherry-x-post-meta.php',
-			]
-		);
+		$this->framework = new \JWB_Custom_Product_Badges_CX_Loader( [
+			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/interface-builder/cherry-x-interface-builder.php',
+			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/post-meta/cherry-x-post-meta.php',
+		] );
 
 	}
 
@@ -118,21 +116,6 @@ class Plugin {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/meta-fields.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/jwb-integration.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/tools.php';
-
-		$this->init_components();
-
-	}
-
-	/**
-	 * Init components.
-	 *
-	 * Initialize JWB Custom Product Badges components. Initialize all the components that run
-	 * JWB Custom Product Badges.
-	 *
-	 * @since  1.1.0
-	 * @access private
-	 */
-	private function init_components() {
 
 		$this->meta_fields     = new Meta_Fields();
 		$this->jwb_integration = new JWB_Integration();

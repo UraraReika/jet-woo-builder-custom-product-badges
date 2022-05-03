@@ -208,10 +208,12 @@ class JWB_Integration {
 	 * @return array
 	 */
 	public function extend_archive_item_macros_settings( $list, $settings ) {
+
 		$list['enable_custom_badges'] = isset( $settings['enable_custom_badges'] ) ? $settings['enable_custom_badges'] : '';
 		$list['enable_default_badge'] = isset( $settings['enable_default_badge'] ) ? $settings['enable_default_badge'] : '';
 
 		return $list;
+
 	}
 
 	/**

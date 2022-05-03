@@ -167,10 +167,10 @@ class JWB_Integration {
 
 		global $product;
 
-		$custom_badge  = isset( $settings['enable_custom_badges'] ) ? filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) : false;
+		$custom_badges = isset( $settings['enable_custom_badges'] ) ? filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) : false;
 		$default_badge = isset( $settings['enable_default_badge'] ) ? filter_var( $settings['enable_default_badge'], FILTER_VALIDATE_BOOLEAN ) : false;
 
-		if ( ! $custom_badge ) {
+		if ( ! $custom_badges ) {
 			return $html;
 		}
 

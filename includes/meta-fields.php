@@ -13,15 +13,19 @@ class Meta_Fields {
 	}
 
 	/**
-	 * Initialize template meta fields
+	 * Product meta.
+	 *
+	 * Add custom meta fields for products where you can select specific badges.
+	 *
+	 * @since  1.0.0
+	 * @access public
 	 *
 	 * @return void
 	 */
 	public function add_product_meta() {
-
 		new \Cherry_X_Post_Meta( [
 			'id'            => 'jet-woo-builder-badge-settings',
-			'title'         => esc_html__( 'JetWooBuilder Badges', 'jet-woo-builder' ),
+			'title'         => __( 'Custom Product Badges', 'jet-woo-builder' ),
 			'page'          => [ 'product' ],
 			'context'       => 'side',
 			'priority'      => 'low',
@@ -34,16 +38,19 @@ class Meta_Fields {
 					'value'       => '',
 					'placeholder' => null,
 					'element'     => 'control',
-					'options'     => $this->get_custom_badges_list(),
-					'label'       => __( 'Select Product Badges:', 'jet-woo-builder' ),
+					'options'     => Plugin::instance()->tools->get_predefined_badges_list(),
 				],
 			],
 		] );
-
 	}
 
 	/**
-	 * Return UI builder instance
+	 * Builder.
+	 *
+	 * Return UI builder instance.
+	 *
+	 * @since  1.0.0
+	 * @access public
 	 *
 	 * @return CX_Interface_Builder
 	 */
@@ -51,26 +58,9 @@ class Meta_Fields {
 
 		$builder_data = Plugin::instance()->framework->get_included_module_data( 'cherry-x-interface-builder.php' );
 
-		return new \CX_Interface_Builder(
-			[
-				'path' => $builder_data['path'],
-				'url'  => $builder_data['url'],
-			]
-		);
-
-	}
-
-	/**
-	 * Returns list of badges
-	 *
-	 * @return mixed|void
-	 */
-	public function get_custom_badges_list() {
-
-		return apply_filters( 'jet-woo-builder-cpb/integration/badges', [
-			'popular'    => __( 'Popular', 'jet-woo-builder' ),
-			'bestseller' => __( 'Bestseller', 'jet-woo-builder' ),
-			'new'        => __( 'New', 'jet-woo-builder' ),
+		return new \CX_Interface_Builder( [
+			'path' => $builder_data['path'],
+			'url'  => $builder_data['url'],
 		] );
 
 	}

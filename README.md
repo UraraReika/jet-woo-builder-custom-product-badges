@@ -5,11 +5,11 @@ Then with Elementor page builder separate style them in widgets. This functional
 
 When you active plugin in Edit product page you will be able to see [new meta field section](https://i.gyazo.com/2b5a4d7eab3075bb31e546477d3971ef.png).
 In this section you can choose some preregistered [badges](https://i.gyazo.com/8dff318fce74bc5506401215191dbd0a.png) and although with the help of filter hook
-`'jet-woo-builder-cpb/integration/badges'` you can extend the list of the badges.
+`'jwb-custom-product-badges/tools/badges-list'` you can extend the list of the badges.
 
 Here is example:
 ```phpt
-    add_filter( 'jet-woo-builder-cpb/integration/badges', '__your_theme_prefix_extend_custom_badges_list' );
+    add_filter( 'jwb-custom-product-badges/tools/badges-list', '__your_theme_prefix_extend_custom_badges_list' );
 
     function __your_theme_prefix_extend_custom_badges_list( $list ) {
         $list['limited'] = 'Limited';

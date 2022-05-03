@@ -53,11 +53,20 @@ class Plugin {
 	/**
 	 * Integration.
 	 *
-	 * Holds integration instance, responsible for widgets integration.
+	 * Holds integration instance, responsible for JetWooBuilder widgets integration.
 	 *
-	 * @var Integration
+	 * @var JWB_Integration
 	 */
-	public $integration;
+	public $jwb_integration;
+
+	/**
+	 * Tools.
+	 *
+	 * Holds tools class instance.
+	 *
+	 * @var Tools
+	 */
+	public $tools;
 
 	/**
 	 * Plugin constructor.
@@ -96,19 +105,38 @@ class Plugin {
 
 	}
 
+	/**
+	 * Init.
+	 *
+	 * Initialize JWB Custom Product Badges Plugin. Initialize JWB Custom Product Badges components.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 */
 	public function init() {
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/meta-fields.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/integration.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/jwb-integration.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/tools.php';
 
 		$this->init_components();
 
 	}
 
-	public function init_components() {
+	/**
+	 * Init components.
+	 *
+	 * Initialize JWB Custom Product Badges components. Initialize all the components that run
+	 * JWB Custom Product Badges.
+	 *
+	 * @since  1.1.0
+	 * @access private
+	 */
+	private function init_components() {
 
-		$this->meta_fields = new Meta_Fields();
-		$this->integration = new Integration();
+		$this->meta_fields     = new Meta_Fields();
+		$this->jwb_integration = new JWB_Integration();
+		$this->tools           = new Tools();
 
 	}
 

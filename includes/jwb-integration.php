@@ -26,7 +26,6 @@ class JWB_Integration {
 		// Extend JetSmartFilters providers settings list.
 		add_filter( 'jet-smart-filters/providers/jet-woo-products-grid/settings-list', [ $this, 'extend_providers_settings' ] );
 
-
 	}
 
 	/**

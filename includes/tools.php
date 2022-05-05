@@ -26,4 +26,24 @@ class Tools {
 		] );
 	}
 
+	/**
+	 * Localize data.
+	 *
+	 * Returns plugins settings localized data list.
+	 *
+	 * @since 1.1.0
+	 * @since public
+	 *
+	 * @return array
+	 */
+	public function get_localize_data() {
+		return [
+			'messages'     => [
+				'saveSuccess' => __( 'Saved', 'jet-woo-builder' ),
+				'saveError'   => __( 'Error', 'jet-woo-builder' ),
+			],
+			'settingsData' => [],
+		];
+	}
+
 }

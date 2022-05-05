@@ -99,6 +99,7 @@ class Plugin {
 		$this->framework = new \JWB_Custom_Product_Badges_CX_Loader( [
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/interface-builder/cherry-x-interface-builder.php',
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/post-meta/cherry-x-post-meta.php',
+			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/jet-dashboard/jet-dashboard.php',
 		] );
 
 	}
@@ -112,6 +113,26 @@ class Plugin {
 	 * @access public
 	 */
 	public function init() {
+		$this->init_components();
+		$this->init_dashboard();
+	}
+
+	/**
+	 * Init components.
+	 *
+	 * Initialize JWB Custom Product Badges components. Initialize all the components that run
+	 * JWB Custom Product Badges.
+	 *
+	 * @since  1.1.0
+	 * @access private
+	 */
+	private function init_components() {
+
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/settings/manager.php';
+
+		if ( is_admin() ) {
+			new Settings();
+		}
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/meta-fields.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/widgets-integration.php';
@@ -120,6 +141,65 @@ class Plugin {
 		$this->meta_fields         = new Meta_Fields();
 		$this->widgets_integration = new Widgets_Integration();
 		$this->tools               = new Tools();
+
+	}
+
+	/**
+	 * Init dashboard.
+	 *
+	 * Initialize JWB Custom Product Badges dashboard.
+	 *
+	 * @since  1.1.0
+	 * @access private
+	 */
+	private function init_dashboard() {
+		if ( is_admin() ) {
+			$dashboard_framework_data = $this->framework->get_included_module_data( 'jet-dashboard.php' );
+			$dashboard                = \Jet_Dashboard\Dashboard::get_instance();
+
+			$dashboard->init(
+				[
+					'path'           => $dashboard_framework_data['path'],
+					'url'            => $dashboard_framework_data['url'],
+					'cx_ui_instance' => [ $this, 'dashboard_ui_instance' ],
+					'plugin_data'    => [
+						'slug'         => 'jwb-custom-product-badges',
+						'file'         => 'jet-woo-builder-custom-product-badges/jet-woo-builder-custom-product-badges.php',
+						'version'      => JWB_CUSTOM_PRODUCT_BUDGES_VERSION,
+						'plugin_links' => [
+							[
+								'label'  => __( 'Go to settings', 'jet-woo-builder' ),
+								'url'    => add_query_arg(
+									[
+										'page'    => 'jet-dashboard-settings-page',
+										'subpage' => 'jwb-custom-product-badges-general-settings',
+									],
+									admin_url( 'admin.php' )
+								),
+								'target' => '_self',
+							],
+						],
+					],
+				]
+			);
+		}
+	}
+
+	/**
+	 * Dashboard UI instance.
+	 *
+	 * Get Vue UI Instance for JetDashboard module.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @return object
+	 */
+	public function dashboard_ui_instance() {
+
+		$vue_ui_data = $this->framework->get_included_module_data( 'cherry-x-vue-ui.php' );
+
+		return new CX_Vue_UI( $vue_ui_data );
 
 	}
 

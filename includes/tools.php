@@ -42,7 +42,9 @@ class Tools {
 				'saveSuccess' => __( 'Saved', 'jet-woo-builder' ),
 				'saveError'   => __( 'Error', 'jet-woo-builder' ),
 			],
-			'settingsData' => [],
+			'settingsData' => [
+				'predefinedBadges' => $this->get_predefined_badges_list(),
+			],
 		];
 	}
 

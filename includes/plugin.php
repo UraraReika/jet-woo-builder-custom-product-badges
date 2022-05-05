@@ -55,9 +55,9 @@ class Plugin {
 	 *
 	 * Holds integration instance, responsible for JetWooBuilder widgets integration.
 	 *
-	 * @var JWB_Integration
+	 * @var Widgets_Integration
 	 */
-	public $jwb_integration;
+	public $widgets_integration;
 
 	/**
 	 * Tools.
@@ -114,12 +114,12 @@ class Plugin {
 	public function init() {
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/meta-fields.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/jwb-integration.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/widgets-integration.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/tools.php';
 
-		$this->meta_fields     = new Meta_Fields();
-		$this->jwb_integration = new JWB_Integration();
-		$this->tools           = new Tools();
+		$this->meta_fields         = new Meta_Fields();
+		$this->widgets_integration = new Widgets_Integration();
+		$this->tools               = new Tools();
 
 	}
 

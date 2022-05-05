@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class JWB_Integration {
+class Widgets_Integration {
 
 	public function __construct() {
 

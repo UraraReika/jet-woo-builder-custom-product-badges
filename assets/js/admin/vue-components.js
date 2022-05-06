@@ -4,6 +4,7 @@ let JWBCPBSettingsMixin = {
 	data: function() {
 		return {
 			pageOptions: window.JWBCPBSettingsConfig.settingsData,
+			inputBadge: '',
 			preparedOptions: {},
 			savingStatus: false,
 			ajaxSaveHandler: null,
@@ -22,7 +23,11 @@ let JWBCPBSettingsMixin = {
 				for ( let option in options ) {
 
 					if ( options.hasOwnProperty( option ) ) {
-						prepared[ option ] = options[option]['value'];
+						if ( options[option].hasOwnProperty('value') ) {
+							prepared[ option ] = options[option]['value'];
+						} else {
+							prepared[ option ] = options[option];
+						}
 					}
 				}
 
@@ -35,6 +40,17 @@ let JWBCPBSettingsMixin = {
 	},
 
 	methods: {
+		addNewBadge: function() {
+			if ( this.inputBadge.length > 0 ) {
+				this.pageOptions.badgesList.push( {
+					'value': this.inputBadge.toLowerCase().replace( /\s/g, '-' ),
+					'label': this.inputBadge
+				} );
+
+				this.inputBadge = '';
+			}
+		},
+
 		saveOptions: function() {
 			let self = this;
 
@@ -42,7 +58,7 @@ let JWBCPBSettingsMixin = {
 
 			self.ajaxSaveHandler = jQuery.ajax( {
 				type: 'POST',
-				url: window.jetWooBuilderSettingsConfig.settingsApiUrl,
+				url: window.JWBCPBSettingsConfig.settingsApiUrl,
 				dataType: 'json',
 				data: self.preparedOptions,
 				beforeSend: function( jqXHR, ajaxSettings ) {

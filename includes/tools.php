@@ -48,13 +48,20 @@ class Tools {
 			];
 		}
 
+		$settings = get_option( Settings::get_instance()->key, [] );
+
+		if ( empty( $settings ) ) {
+			$settings['badgesList'] = $transformed_badges;
+		}
+
 		return [
 			'messages'     => [
 				'saveSuccess' => __( 'Saved', 'jet-woo-builder' ),
 				'saveError'   => __( 'Error', 'jet-woo-builder' ),
 			],
+			'settingsApiUrl' => get_rest_url() . 'jwb-custom-product-badges-api/v1/plugin-settings',
 			'settingsData' => [
-				'badgesList' => $transformed_badges,
+				'badgesList' => $settings['badgesList'],
 			],
 		];
 	}

@@ -4,4 +4,9 @@
 	<div v-for="(badge, index) in pageOptions.badgesList">
 		{{ badge.label }}
 	</div>
+
+	<form @submit.prevent="addNewBadge">
+		<input type="text" v-model.trim="inputBadge">
+		<button type="submit">Add new</button>
+	</form>
 </div>

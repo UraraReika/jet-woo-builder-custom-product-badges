@@ -142,6 +142,12 @@ class Plugin {
 		$this->widgets_integration = new Widgets_Integration();
 		$this->tools               = new Tools();
 
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/rest-api.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/plugin-settings.php';
+
+		new Rest_Api();
+
 	}
 
 	/**

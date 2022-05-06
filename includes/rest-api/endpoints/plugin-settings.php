@@ -41,7 +41,7 @@ class Plugin_Settings extends Base {
 		if ( is_wp_error( $current ) ) {
 			return rest_ensure_response( [
 				'status'  => 'error',
-				'message' => esc_html__( 'Server Error', 'jet-woo-builder' ),
+				'message' => __( 'Server Error', 'jet-woo-builder' ),
 			] );
 		}
 

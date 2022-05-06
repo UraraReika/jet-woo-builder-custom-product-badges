@@ -38,7 +38,7 @@ class Meta_Fields {
 					'value'       => '',
 					'placeholder' => null,
 					'element'     => 'control',
-					'options'     => Plugin::instance()->tools->get_predefined_badges_list(),
+					'options'     => Plugin::instance()->tools->get_badges_list(),
 				],
 			],
 		] );

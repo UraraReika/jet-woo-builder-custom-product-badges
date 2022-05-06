@@ -3,6 +3,7 @@
 
 	<div v-for="(badge, index) in pageOptions.badgesList">
 		{{ badge.label }}
+		<button @click="deleteBadge( badge.value, badge.label )">Del</button>
 	</div>
 
 	<form @submit.prevent="addNewBadge">

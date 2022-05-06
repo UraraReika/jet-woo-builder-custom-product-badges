@@ -12,7 +12,6 @@ let JWBCPBSettingsMixin = {
 	},
 
 	created: function() {
-	//	console.log(this.pageOptions);
 	},
 
 	watch: {
@@ -21,13 +20,8 @@ let JWBCPBSettingsMixin = {
 				let prepared = {};
 
 				for ( let option in options ) {
-
 					if ( options.hasOwnProperty( option ) ) {
-						if ( options[option].hasOwnProperty('value') ) {
-							prepared[ option ] = options[option]['value'];
-						} else {
-							prepared[ option ] = options[option];
-						}
+						prepared[ option ] = Array.isArray( options[option] ) ? options[option] : options[option]['value'];
 					}
 				}
 
@@ -42,12 +36,35 @@ let JWBCPBSettingsMixin = {
 	methods: {
 		addNewBadge: function() {
 			if ( this.inputBadge.length > 0 ) {
-				this.pageOptions.badgesList.push( {
-					'value': this.inputBadge.toLowerCase().replace( /\s/g, '-' ),
-					'label': this.inputBadge
-				} );
 
-				this.inputBadge = '';
+				let badgeValue = this.inputBadge.toLowerCase().replace( /\s/g, '-' ),
+					isValid = true;
+
+				for ( let badge of this.pageOptions.badgesList ) {
+					if ( badge.value === badgeValue ) {
+						isValid = false;
+					}
+				}
+
+				if ( isValid ) {
+					this.pageOptions.badgesList.push( {
+						'value': badgeValue,
+						'label': this.inputBadge
+					} );
+
+					this.inputBadge = '';
+				} else {
+					alert( 'This badge already exist!' );
+				}
+
+			}
+		},
+
+		deleteBadge: function ( value, label ) {
+			let confirmDeletion = confirm('Are you sure you want to delete ` ' + label + '` badge?');
+
+			if ( confirmDeletion ) {
+				this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
 			}
 		},
 

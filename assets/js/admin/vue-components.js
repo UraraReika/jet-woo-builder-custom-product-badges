@@ -52,6 +52,7 @@ let JWBCPBSettingsMixin = {
 						'label': this.inputBadge
 					} );
 
+					this.pageOptions.actionType['value'] = 'add';
 					this.inputBadge = '';
 				} else {
 					alert( 'This badge already exist!' );
@@ -65,6 +66,7 @@ let JWBCPBSettingsMixin = {
 
 			if ( confirmDeletion ) {
 				this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
+				this.pageOptions.actionType['value'] = 'remove';
 			}
 		},
 

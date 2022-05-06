@@ -51,6 +51,10 @@ class Plugin_Settings extends Base {
 
 		update_option( \JWB_CPB\Settings::get_instance()->key, $current );
 
+		if ( 'remove' === $current['actionType'] ) {
+			\JWB_CPB\Plugin::instance()->tools->update_products();
+		}
+
 		return rest_ensure_response( [
 			'status'  => 'success',
 			'message' => __( 'Settings have been saved', 'jet-woo-builder' ),

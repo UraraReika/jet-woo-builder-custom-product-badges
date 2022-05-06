@@ -31,7 +31,7 @@ class Tools {
 	 *
 	 * Returns list of custom badges, than can be extended with hook.
 	 *
-	 * @since 1.1.0
+	 * @since  1.1.0
 	 * @access public
 	 *
 	 * @return mixed|void
@@ -80,8 +80,45 @@ class Tools {
 			'settingsApiUrl' => get_rest_url() . 'jwb-custom-product-badges-api/v1/plugin-settings',
 			'settingsData'   => [
 				'badgesList' => $badges,
+				'actionType' => [
+					'value' => 'add',
+				],
 			],
 		];
+	}
+
+	/**
+	 * Update products.
+	 *
+	 * Updates all products badges meta when budge remove in admin dashboard.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 */
+	public function update_products() {
+
+		$badges = $this->get_badges_list();
+		$posts  = get_posts( [
+			'post_type'   => 'product',
+			'numberposts' => -1,
+		] );
+
+		foreach ( $posts as $post ) {
+			$badge_meta = get_post_meta( $post->ID, '_jet_woo_builder_badges', true );
+
+			if ( ! empty( $badge_meta ) ) {
+				$new_badge_meta = [];
+
+				foreach ( $badges as $key => $value ) {
+					if ( in_array( $key, $badge_meta ) ) {
+						$new_badge_meta[] = $key;
+					}
+				}
+
+				update_post_meta( $post->ID, '_jet_woo_builder_badges', $new_badge_meta );
+			}
+		}
+
 	}
 
 }

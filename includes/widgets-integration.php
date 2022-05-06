@@ -179,7 +179,7 @@ class Widgets_Integration {
 
 		$badges = get_post_meta( $product->get_id() , '_jet_woo_builder_badges', true );
 
-		if ( $badges ) {
+		if ( ! empty( $badges ) ) {
 			foreach ( $badges as $badge ) {
 				$html .= sprintf(
 					'<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>',

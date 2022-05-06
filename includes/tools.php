@@ -37,13 +37,24 @@ class Tools {
 	 * @return array
 	 */
 	public function get_localize_data() {
+
+		$predefined_badges  = $this->get_predefined_badges_list();
+		$transformed_badges = [];
+
+		foreach ( $predefined_badges as $key => $value ) {
+			$transformed_badges[] = [
+				'value' => $key,
+				'label' => $value,
+			];
+		}
+
 		return [
 			'messages'     => [
 				'saveSuccess' => __( 'Saved', 'jet-woo-builder' ),
 				'saveError'   => __( 'Error', 'jet-woo-builder' ),
 			],
 			'settingsData' => [
-				'predefinedBadges' => $this->get_predefined_badges_list(),
+				'badgesList' => $transformed_badges,
 			],
 		];
 	}

@@ -10,6 +10,10 @@ let JWBCPBSettingsMixin = {
 		};
 	},
 
+	created: function() {
+	//	console.log(this.pageOptions);
+	},
+
 	watch: {
 		pageOptions: {
 			handler( options ) {

@@ -49,7 +49,14 @@ class Tools {
 			}
 		}
 
-		return apply_filters( 'jwb-custom-product-badges/tools/badges-list', $badges );
+		$deprecated_hook = 'jet-woo-builder-cpb/integration/badges';
+		$replacement_hook = 'jwb-custom-product-badges/tools/badges-list';
+
+		_deprecated_hook( $deprecated_hook, '1.1.0', $replacement_hook );
+
+		$badges = apply_filters( $deprecated_hook, $badges );
+
+		return apply_filters( $replacement_hook, $badges );
 
 	}
 

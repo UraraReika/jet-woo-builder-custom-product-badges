@@ -54,6 +54,33 @@ class Tools {
 	}
 
 	/**
+	 * Badges for display.
+	 *
+	 * Return pretty list of badges labels to display them in widgets.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @param array $badges Item badges list.
+	 *
+	 * @return array
+	 */
+	public function get_badges_for_display( $badges ) {
+
+		$badges_list = $this->get_badges_list();
+		$result    = [];
+
+		foreach ( $badges as $badge ) {
+			if ( isset( $badges_list[ $badge ] ) ) {
+				$result[ $badge ] = $badges_list[ $badge ];
+			}
+		}
+
+		return $result;
+
+	}
+
+	/**
 	 * Localize data.
 	 *
 	 * Returns plugins settings localized data list.

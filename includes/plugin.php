@@ -136,10 +136,10 @@ class Plugin {
 			new Settings();
 		}
 
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/meta-fields.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/widgets-integration.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/tools.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/hooks-handler.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/meta-fields.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/widgets-integration.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/tools.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/hooks-handler.php';
 
 		$this->meta_fields         = new Meta_Fields();
 		$this->widgets_integration = new Widgets_Integration();

@@ -40,7 +40,7 @@ class Widgets_Integration {
 	 */
 	public function register_custom_badge_controls( $obj ) {
 
-		$badges = Plugin::instance()->tools->get_predefined_badges_list();
+		$badges = Plugin::instance()->tools->get_badges_list();
 
 		$obj->start_controls_section(
 			'section_custom_badges',
@@ -178,14 +178,11 @@ class Widgets_Integration {
 		}
 
 		$badges = get_post_meta( $product->get_id() , '_jet_woo_builder_badges', true );
+		$badges = Plugin::instance()->tools->get_badges_for_display( $badges );
 
 		if ( ! empty( $badges ) ) {
-			foreach ( $badges as $badge ) {
-				$html .= sprintf(
-					'<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>',
-					strtolower( str_replace( ' ', '-', $badge ) ),
-					$badge
-				);
+			foreach ( $badges as $key => $value ) {
+				$html .= sprintf( '<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $key, $value );
 			}
 		}
 

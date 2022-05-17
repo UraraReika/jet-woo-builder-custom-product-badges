@@ -151,4 +151,5 @@ class General extends Page_Module_Base {
 		return $templates;
 
 	}
+
 }

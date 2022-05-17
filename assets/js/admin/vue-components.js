@@ -11,9 +11,6 @@ let JWBCPBSettingsMixin = {
 		};
 	},
 
-	created: function() {
-	},
-
 	watch: {
 		pageOptions: {
 			handler( options ) {
@@ -55,14 +52,14 @@ let JWBCPBSettingsMixin = {
 					this.pageOptions.actionType['value'] = 'add';
 					this.inputBadge = '';
 				} else {
-					alert( 'This badge already exist!' );
+					alert( __( 'This badge already exist!', 'jwb-custom-product-badges' ) );
 				}
 
 			}
 		},
 
 		deleteBadge: function ( value, label ) {
-			let confirmDeletion = confirm('Are you sure you want to delete ` ' + label + '` badge?');
+			let confirmDeletion = confirm( wp.i18n.sprintf( __( 'Are you sure you want to delete `%s` badge?.', 'jwb-custom-product-badges' ), label ) );
 
 			if ( confirmDeletion ) {
 				this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );

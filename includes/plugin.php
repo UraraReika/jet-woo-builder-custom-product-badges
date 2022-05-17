@@ -139,10 +139,13 @@ class Plugin {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/meta-fields.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/widgets-integration.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/tools.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/hooks-handler.php';
 
 		$this->meta_fields         = new Meta_Fields();
 		$this->widgets_integration = new Widgets_Integration();
 		$this->tools               = new Tools();
+
+		new Hooks_Handler();
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/rest-api.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';
@@ -222,6 +225,8 @@ class Plugin {
 	 * @return void
 	 */
 	public function activation() {
+
+		$this->init_components();
 
 		$predefined_badges = $this->tools->get_predefined_badges_list();
 		$settings          = get_option( Settings::get_instance()->key, [] );

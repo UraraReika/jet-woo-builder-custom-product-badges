@@ -140,12 +140,14 @@ class Plugin {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/widgets-integration.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/tools.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/hooks-handler.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/assets.php';
 
 		$this->meta_fields         = new Meta_Fields();
 		$this->widgets_integration = new Widgets_Integration();
 		$this->tools               = new Tools();
 
 		new Hooks_Handler();
+		new Assets();
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/rest-api.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';

@@ -1,0 +1,157 @@
+.jwb-custom-product-badges-settings-page {
+	&__general {
+		.cx-vui-subtitle {
+			border-bottom: 1px solid #DCDCDD;
+			padding-bottom: 5px;
+		}
+
+		.jwb-custom-product-badges-list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5px;
+
+			&__item {
+				background-color: #EDF6FA;
+				color: #7B7E81;
+				padding: 5px;
+				display: flex;
+				align-items: center;
+				margin: 0;
+
+				&-remove {
+					width: 20px;
+					height: 20px;
+					border: none;
+					border-radius: 1px;
+					background-color: #fff;
+					cursor: pointer;
+					margin-left: 5px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: all .3s ease;
+
+					&:hover {
+						background-color: #007CBA;
+						svg {
+							fill: #fff;
+						}
+					}
+				}
+			}
+		}
+
+		form {
+			margin-top: 13px;
+
+			> * {
+				font-size: 13px;
+				line-height: 20px;
+				border-radius: 4px;
+				padding: 5px 15px;
+				box-shadow: none;
+				outline: none;
+				box-sizing: border-box;
+			}
+
+			input {
+				background-color: #f4f4f5;
+				color: #7B7E81;
+				border: none;
+				padding: 6px 15px;
+
+				&:focus {
+					box-shadow: 0 0 0 2px #80bddc inset;
+					background-color: #fff;
+					color: #23282D;
+				}
+			}
+
+			button {
+				background-color: #fff;
+				color: #007CBA;
+				cursor: pointer;
+				border: 1px solid #007CBA;
+				transition: all .15s ease;
+				font-weight: 500;
+
+				&:hover {
+					color: #066EA2;
+					border-color: #066EA2;
+				}
+			}
+		}
+	}
+}
+
+#jet-woo-builder-badge-settings {
+	.cx-control {
+		padding: 0;
+
+		&__content {
+			flex: 0 1 100%;
+
+			.select2-selection__choice {
+				background-color: #EDF6FA;
+				color: #7B7E81;
+				padding: 5px 5px 5px 0;
+				display: flex;
+				align-items: center;
+
+				&__remove {
+					width: 20px;
+					height: 20px;
+					border: none;
+					border-radius: 1px;
+					background-color: #fff;
+					color: #7B7E81;
+					cursor: pointer;
+					margin-left: 5px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: all .3s ease;
+
+					&:hover {
+						background-color: #007CBA;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
+
+#select2-_jet_woo_builder_badges-results {
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	position: absolute;
+	border: 1px solid #80BDDC;
+	box-sizing: border-box;
+	box-shadow: 0 4px 20px rgb(35 40 45 / 24%);
+	border-radius: 0 0 4px 4px;
+	background: #fff;
+	padding: 10px 0;
+	margin: -1px 0 0 0;
+
+	.select2-results__option {
+		color: #7B7E81;
+		font-size: 13px;
+		line-height: 17px;
+		padding: 3px 12px 4px;
+		cursor: pointer;
+		transition: all .15s ease;
+
+		&[data-selected=true]:not(.select2-results__option--highlighted) {
+			background: #EDF6FA;
+			color: #7B7E81;
+		}
+
+		&--highlighted {
+			color: #fff;
+			background: #007CBA;
+		}
+	}
+}

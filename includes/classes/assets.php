@@ -24,7 +24,7 @@ class Assets {
 
 		$current_screen = get_current_screen();
 
-		if ( ( ! isset( $_GET['subpage'] ) || 'jwb-custom-product-badges-general-settings' !== $_GET['subpage'] ) && 'product' !== $current_screen->post_type ) {
+		if ( 'crocoblock_page_jet-dashboard-settings-page' !== $current_screen->id && 'product' !== $current_screen->post_type ) {
 			return;
 		}
 

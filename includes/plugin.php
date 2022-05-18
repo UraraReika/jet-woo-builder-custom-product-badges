@@ -83,6 +83,7 @@ class Plugin {
 		add_action( 'init', [ $this, 'init' ], -999 );
 
 		register_activation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'activation' ] );
+		register_deactivation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'deactivation' ] );
 
 	}
 
@@ -248,6 +249,19 @@ class Plugin {
 			add_option( Settings::get_instance()->key, $settings );
 		}
 
+	}
+
+	/**
+	 * Deactivation.
+	 *
+	 * Do some stuff on plugin activation.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function deactivation() {
 	}
 
 	/**

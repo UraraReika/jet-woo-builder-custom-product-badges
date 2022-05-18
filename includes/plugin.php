@@ -319,7 +319,7 @@ class Plugin {
 	 *
 	 * Do some stuff on plugin activation.
 	 *
-	 * @since  1.0.0
+	 * @since  1.1.0
 	 * @access public
 	 *
 	 * @return void

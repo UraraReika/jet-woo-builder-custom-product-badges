@@ -80,6 +80,8 @@ class Plugin {
 
 		add_action( 'after_setup_theme', [ $this, 'framework_loader' ], -20 );
 
+		add_action( 'plugins_loaded', [ $this, 'required_plugins_loaded' ] );
+
 		add_action( 'init', [ $this, 'init' ], -999 );
 
 		register_activation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'activation' ] );
@@ -104,6 +106,46 @@ class Plugin {
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/post-meta/cherry-x-post-meta.php',
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/jet-dashboard/jet-dashboard.php',
 		] );
+
+	}
+
+	/**
+	 * Required plugins loaded.
+	 *
+	 * Check if required plugins installed and activated.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 */
+	public function required_plugins_loaded() {
+		if ( ! function_exists( 'jet_woo_builder' ) ) {
+			add_action( 'admin_notices', [ $this, 'admin_notice_missing_jet_woo_builder_plugin' ] );
+
+			return;
+		}
+	}
+
+	/**
+	 * Admin notice.
+	 *
+	 * Show missing JetWooBuilder plugin notice.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 */
+	public function admin_notice_missing_jet_woo_builder_plugin() {
+
+		if ( isset( $_GET['activate'] ) ) {
+			unset( $_GET['activate'] );
+		}
+
+		$message = sprintf(
+			__( '"%s" requires "%s" to be installed and activated.', 'jet-woo-builder' ),
+			'<strong>' . __( 'JetWooBuilder - Custom Products Badges', 'jwb-custom-product-badges' ) . '</strong>',
+			'<strong>' . __( 'JetWooBuilder', 'jet-woo-builder' ) . '</strong>'
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
 
 	}
 

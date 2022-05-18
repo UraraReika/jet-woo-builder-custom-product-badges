@@ -19,11 +19,18 @@ class Tools {
 	 * @return array
 	 */
 	public function get_predefined_badges_list() {
-		return [
+
+		$badges = [
 			'popular'    => __( 'Popular', 'jwb-custom-product-badges' ),
 			'bestseller' => __( 'Bestseller', 'jwb-custom-product-badges' ),
 			'new'        => __( 'New', 'jwb-custom-product-badges' ),
 		];
+
+		$deprecated_hook = 'jet-woo-builder-cpb/integration/badges';
+		$replacement_hook = 'jwb-custom-product-badges/tools/badges-list';
+
+		return apply_filters_deprecated( $deprecated_hook, [ $badges ], '1.1.0', $replacement_hook );
+
 	}
 
 	/**
@@ -49,10 +56,7 @@ class Tools {
 			}
 		}
 
-		$deprecated_hook = 'jet-woo-builder-cpb/integration/badges';
-		$replacement_hook = 'jwb-custom-product-badges/tools/badges-list';
-
-		return apply_filters_deprecated( $deprecated_hook, [ $badges ], '1.1.0', $replacement_hook );
+		return $badges;
 
 	}
 

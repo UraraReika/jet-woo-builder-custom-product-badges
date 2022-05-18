@@ -104,6 +104,7 @@ class Plugin {
 		$this->framework = new \JWB_Custom_Product_Badges_CX_Loader( [
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/interface-builder/cherry-x-interface-builder.php',
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/post-meta/cherry-x-post-meta.php',
+			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/db-updater/cherry-x-db-updater.php',
 			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/jet-dashboard/jet-dashboard.php',
 		] );
 
@@ -192,6 +193,11 @@ class Plugin {
 
 		if ( is_admin() ) {
 			new Settings();
+
+			// Init DB upgrader.
+			require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/db-upgrader.php';
+
+			DB_Upgrader::instance()->init();
 		}
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/meta-fields.php';

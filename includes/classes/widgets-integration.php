@@ -17,6 +17,9 @@ class Widgets_Integration {
 		add_action( 'elementor/element/jet-woo-builder-archive-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ] );
 		add_action( 'elementor/element/jet-single-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ] );
 
+		// Additional controls injections.
+		add_action( 'elementor/element/jet-single-sale-badge/section_single_badge_style/before_section_end', [ $this, 'inject_additional_single_product_badge_style_controls' ], 10, 2 );
+
 		// Handle custom badge output.
 		add_filter( 'jet-woo-builder/template-functions/product-sale-flash/on-sale', [ $this, 'enable_custom_badge_display' ], 10, 3 );
 		add_filter( 'jet-woo-builder/templates/single-product/sale-badge/on-sale', [ $this, 'enable_custom_badge_display' ], 10, 3 );
@@ -131,6 +134,40 @@ class Widgets_Integration {
 		}
 
 		$obj->end_controls_section();
+
+	}
+
+	/**
+	 * Inject controls.
+	 *
+	 * Additional widget styles controls injections.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @param object $element Elementor widget instance.
+	 * @param array  $args    List of additional arguments.
+	 */
+	public function inject_additional_single_product_badge_style_controls( $element, $args ) {
+
+		$element->start_injection( [
+			'at' => 'before',
+			'of' => 'single_badge_alignment',
+		] );
+
+		$element->add_responsive_control(
+			'single_badge_margin',
+			[
+				'label'      => __( 'Margin', 'jet-woo-builder' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .jet-woo-builder .onsale' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$element->end_injection();
 
 	}
 

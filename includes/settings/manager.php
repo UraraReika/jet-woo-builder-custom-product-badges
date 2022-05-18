@@ -69,7 +69,7 @@ class Settings {
 	 */
 	public function register_settings_category() {
 		\Jet_Dashboard\Dashboard::get_instance()->module_manager->register_module_category( array(
-			'name'     => __( 'Custom Product Badges', 'jet-woo-builder' ),
+			'name'     => __( 'Custom Product Badges', 'jwb-custom-product-badges' ),
 			'slug'     => 'jwb-custom-product-badges',
 			'priority' => 2,
 		) );

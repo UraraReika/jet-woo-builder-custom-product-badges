@@ -140,9 +140,9 @@ class Plugin {
 		}
 
 		$message = sprintf(
-			__( '"%s" requires "%s" to be installed and activated.', 'jet-woo-builder' ),
+			__( '"%s" requires "%s" to be installed and activated.', 'jwb-custom-product-badges' ),
 			'<strong>' . __( 'JetWooBuilder - Custom Products Badges', 'jwb-custom-product-badges' ) . '</strong>',
-			'<strong>' . __( 'JetWooBuilder', 'jet-woo-builder' ) . '</strong>'
+			'<strong>' . __( 'JetWooBuilder', 'jwb-custom-product-badges' ) . '</strong>'
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
@@ -158,8 +158,23 @@ class Plugin {
 	 * @access public
 	 */
 	public function init() {
+		$this->lang();
 		$this->init_components();
 		$this->init_dashboard();
+	}
+
+	/**
+	 * Lang.
+	 *
+	 * Loads the translation files.
+	 *
+	 * @since 1.1.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function lang() {
+		load_plugin_textdomain( 'jwb-custom-product-badges', false, JWB_CUSTOM_PRODUCT_BUDGES_PATH . '/languages' );
 	}
 
 	/**
@@ -224,7 +239,7 @@ class Plugin {
 						'version'      => JWB_CUSTOM_PRODUCT_BUDGES_VERSION,
 						'plugin_links' => [
 							[
-								'label'  => __( 'Go to settings', 'jet-woo-builder' ),
+								'label'  => __( 'Go to settings', 'jwb-custom-product-badges' ),
 								'url'    => add_query_arg(
 									[
 										'page'    => 'jet-dashboard-settings-page',

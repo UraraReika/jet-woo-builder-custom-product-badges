@@ -20,9 +20,9 @@ class Tools {
 	 */
 	public function get_predefined_badges_list() {
 		return [
-			'popular'    => __( 'Popular', 'jet-woo-builder' ),
-			'bestseller' => __( 'Bestseller', 'jet-woo-builder' ),
-			'new'        => __( 'New', 'jet-woo-builder' ),
+			'popular'    => __( 'Popular', 'jwb-custom-product-badges' ),
+			'bestseller' => __( 'Bestseller', 'jwb-custom-product-badges' ),
+			'new'        => __( 'New', 'jwb-custom-product-badges' ),
 		];
 	}
 
@@ -107,10 +107,6 @@ class Tools {
 		}
 
 		return [
-			'messages'       => [
-				'saveSuccess' => __( 'Saved', 'jet-woo-builder' ),
-				'saveError'   => __( 'Error', 'jet-woo-builder' ),
-			],
 			'settingsApiUrl' => get_rest_url() . 'jwb-custom-product-badges-api/v1/plugin-settings',
 			'settingsData'   => [
 				'badgesList' => $badges,

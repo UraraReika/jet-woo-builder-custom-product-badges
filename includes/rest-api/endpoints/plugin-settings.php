@@ -43,7 +43,7 @@ class Plugin_Settings extends Base {
 		if ( is_wp_error( $current ) ) {
 			return rest_ensure_response( [
 				'status'  => 'error',
-				'message' => __( 'Server Error', 'jet-woo-builder' ),
+				'message' => __( 'Server Error', 'jwb-custom-product-badges' ),
 			] );
 		}
 
@@ -57,7 +57,7 @@ class Plugin_Settings extends Base {
 
 		return rest_ensure_response( [
 			'status'  => 'success',
-			'message' => __( 'Settings have been saved', 'jet-woo-builder' ),
+			'message' => __( 'Settings have been saved', 'jwb-custom-product-badges' ),
 		] );
 
 	}

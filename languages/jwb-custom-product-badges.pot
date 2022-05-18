@@ -1,0 +1,459 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JetWooBuilder - Custom Product Badges\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-18 11:33+0300\n"
+"PO-Revision-Date: 2018-05-18 18:31+0200\n"
+"Last-Translator: \n"
+"Language-Team: Crocoblock\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;_ex:1,2c;_n:1,2;_nx:4c,1,2;"
+"_n_noop:1,2;_nx_noop:4c,1,2\n"
+"esc_attr__;_x: 1,2c;_n:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: cherry-framework\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+
+#: assets/js/admin/vue-components.js:55
+msgid "This badge already exist!"
+msgstr ""
+
+#: assets/js/admin/vue-components.js:62
+#, javascript-format
+msgid "Are you sure you want to delete `%s` badge?."
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:46
+msgid "Go to docs"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:329
+#, javascript-format
+msgid "You can update <b>%s plugin</b>"
+msgid_plural "You can update <b>%s plugins</b>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:330
+msgid "All plugins updated"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:334
+msgid "Activate license to update your JetPlugins"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:341
+#, javascript-format
+msgid "You can install <b>%s more Plugin</b> with your licence"
+msgid_plural "You can install <b>%s more Plugins</b>  with your licence"
+msgstr[0] ""
+msgstr[1] ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:342
+msgid "All available plugins are already installed"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:372
+#: framework/jet-dashboard/assets/js/welcome-page.js:380
+msgid "Try quickstart installation"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:377
+msgid "Unpack Free All-inclusive items"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:451
+msgid "<b class=\"lifetime\">Lifetime</b>"
+msgstr ""
+
+#: framework/jet-dashboard/assets/js/welcome-page.js:454
+#, javascript-format
+msgid "Licence expires <b class=\"expire-date\">%s</b>"
+msgstr ""
+
+#: framework/jet-dashboard/inc/license-manager.php:253
+msgid "License expires soon!"
+msgstr ""
+
+#: framework/jet-dashboard/inc/license-manager.php:254
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+
+#: framework/jet-dashboard/inc/license-manager.php:257
+msgid "Go to account"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/license/module.php:37
+msgid "Plugin Manager"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/license/module.php:65
+#: framework/jet-dashboard/inc/modules/license/module.php:66
+msgid "Update & Installation"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/license/module.php:84
+#: framework/jet-dashboard/inc/modules/license/module.php:85
+msgid "License"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/settings/module.php:43
+msgid "Settings"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/settings/module.php:74
+#: framework/jet-dashboard/inc/modules/settings/module.php:75
+msgid "JetPlugins Settings"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/upsale/module.php:49
+#: framework/jet-dashboard/inc/modules/upsale/module.php:189
+#: framework/jet-dashboard/views/upsale/main.php:38
+msgid "Get Crocoblock"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/upsale/module.php:110
+#: framework/jet-dashboard/inc/modules/upsale/module.php:111
+#: framework/jet-dashboard/inc/modules/upsale/module.php:183
+msgid "Go Lifetime"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/upsale/module.php:128
+#: framework/jet-dashboard/inc/modules/upsale/module.php:129
+#: framework/jet-dashboard/inc/modules/upsale/module.php:186
+msgid "Go All-Inclusive"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/welcome/dev-test.php:37
+msgid "Dev Test Page"
+msgstr ""
+
+#: framework/jet-dashboard/inc/modules/welcome/module.php:37
+msgid "Welcome"
+msgstr ""
+
+#: framework/jet-dashboard/inc/plugin-manager.php:224
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: framework/jet-dashboard/jet-dashboard.php:244
+#: framework/jet-dashboard/jet-dashboard.php:245
+msgid "Crocoblock"
+msgstr ""
+
+#: framework/jet-dashboard/jet-dashboard.php:257
+#: framework/jet-dashboard/jet-dashboard.php:258
+msgid "Dashboard"
+msgstr ""
+
+#: framework/jet-dashboard/views/common/sidebar.php:28
+msgid "New to Crocoblock?"
+msgstr ""
+
+#: framework/jet-dashboard/views/common/sidebar.php:29
+msgid "Start Here"
+msgstr ""
+
+#: framework/jet-dashboard/views/common/sidebar.php:63
+msgid "Support & Info"
+msgstr ""
+
+#: framework/jet-dashboard/views/common/sidebar.php:64
+msgid "Help Center"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:9
+msgid "JetPlugins License Activation"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:10
+msgid "Congratulations!"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:10
+msgid "Your license has been activated!"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:13
+msgid "Activate license for automatic updates and awesome support"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:32
+#: framework/jet-dashboard/views/license/license-item.php:103
+#: framework/jet-dashboard/views/license/main.php:146
+msgid "Activate License"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:33
+#: framework/jet-dashboard/views/license/license-item.php:104
+msgid "Deactivate License"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:44
+msgid "License Key:"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:48
+msgid "Product Name:"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:52
+msgid "Status:"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:56
+msgid "Type:"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:60
+msgid "Expiration Date:"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:64
+msgid "Included Plugins:"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:84
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+
+#: framework/jet-dashboard/views/license/license-item.php:94
+#: framework/jet-dashboard/views/license/main.php:35
+#: framework/jet-dashboard/views/license/main.php:115
+msgid "License Manager"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:10
+msgid "Your Installed JetPlugins"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:22
+msgid "Check For Updates"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:54
+msgid "More included JetPlugins with your licence"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:70
+#: framework/jet-dashboard/views/welcome/main.php:207
+msgid "Get More Plugins"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:105
+msgid "JetPlugins License Deactivation"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:108
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:128
+msgid "JetPlugin’s Update"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:139
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:160
+msgid "Your Licenses"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:169
+msgid "Add New License"
+msgstr ""
+
+#: framework/jet-dashboard/views/license/main.php:174
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+
+#: framework/jet-dashboard/views/upsale/main.php:12
+msgid "Dynamic"
+msgstr ""
+
+#: framework/jet-dashboard/views/upsale/main.php:18
+msgid "E-commerce"
+msgstr ""
+
+#: framework/jet-dashboard/views/upsale/main.php:24
+msgid "Design"
+msgstr ""
+
+#: framework/jet-dashboard/views/upsale/main.php:27
+msgid "18 Advanced JetPlugins"
+msgstr ""
+
+#: framework/jet-dashboard/views/upsale/main.php:28
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:20
+msgid "Manage plugins"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:21
+msgid "Updates"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:35
+msgid "Update Now"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:45
+#: framework/jet-dashboard/views/welcome/main.php:95
+msgid "Activate Now"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:60
+msgid "Manage license"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:61
+msgid "Active Licence"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:85
+msgid "License not active"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:94
+msgid "Manage Now"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:109
+msgid "Installed JetPlugins"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:135
+msgid "Install"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:168
+msgid "Install Wizard"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:179
+msgid "Activate Wizard"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:191
+msgid "Enjoy the perks of All-inclusive"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:223
+msgid "Get a JetPlugins bundle"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:224
+msgid "Save up to 60%"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:234
+msgid "See all plans"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/main.php:246
+msgid "Hot Deals"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/plugin-item-registered.php:29
+msgid "Documentation"
+msgstr ""
+
+#: framework/jet-dashboard/views/welcome/plugin-item-registered.php:55
+msgid "Plugin pages"
+msgstr ""
+
+#: includes/classes/meta-fields.php:28 includes/settings/manager.php:72
+msgid "Custom Product Badges"
+msgstr ""
+
+#: includes/classes/tools.php:23
+msgid "Popular"
+msgstr ""
+
+#: includes/classes/tools.php:24
+msgid "Bestseller"
+msgstr ""
+
+#: includes/classes/tools.php:25
+msgid "New"
+msgstr ""
+
+#: includes/classes/widgets-integration.php:48
+msgid "Custom Badges"
+msgstr ""
+
+#: includes/classes/widgets-integration.php:55
+msgid "Enable Custom Badges"
+msgstr ""
+
+#: includes/classes/widgets-integration.php:63
+msgid "Enable Default Badge"
+msgstr ""
+
+#: includes/classes/widgets-integration.php:99
+msgid "Color"
+msgstr ""
+
+#: includes/classes/widgets-integration.php:113
+msgid "Background Color"
+msgstr ""
+
+#: includes/plugin.php:143
+#, php-format
+msgid "\"%s\" requires \"%s\" to be installed and activated."
+msgstr ""
+
+#: includes/plugin.php:144
+msgid "JetWooBuilder - Custom Products Badges"
+msgstr ""
+
+#: includes/plugin.php:145
+msgid "JetWooBuilder"
+msgstr ""
+
+#: includes/plugin.php:242
+msgid "Go to settings"
+msgstr ""
+
+#: includes/rest-api/endpoints/plugin-settings.php:46
+msgid "Server Error"
+msgstr ""
+
+#: includes/rest-api/endpoints/plugin-settings.php:60
+msgid "Settings have been saved"
+msgstr ""
+
+#: includes/settings/subpages/general.php:53
+msgid "General Settings"
+msgstr ""
+
+#: templates/admin/general-settings.php:2
+msgid "Badges List"
+msgstr ""
+
+#: templates/admin/general-settings.php:30
+msgid "Add New Badges"
+msgstr ""

@@ -25,7 +25,7 @@ class Meta_Fields {
 	public function add_product_meta() {
 		new \Cherry_X_Post_Meta( [
 			'id'            => 'jet-woo-builder-badge-settings',
-			'title'         => __( 'Custom Product Badges', 'jet-woo-builder' ),
+			'title'         => __( 'Custom Product Badges', 'jwb-custom-product-badges' ),
 			'page'          => [ 'product' ],
 			'context'       => 'side',
 			'priority'      => 'low',

@@ -45,14 +45,14 @@ class Widgets_Integration {
 		$obj->start_controls_section(
 			'section_custom_badges',
 			[
-				'label' => __( 'Custom Badges', 'jet-woo-builder' ),
+				'label' => __( 'Custom Badges', 'jwb-custom-product-badges' ),
 			]
 		);
 
 		$obj->add_control(
 			'enable_custom_badges',
 			[
-				'label' => __( 'Enable Custom Badges', 'jet-woo-builder' ),
+				'label' => __( 'Enable Custom Badges', 'jwb-custom-product-badges' ),
 				'type'  => Controls_Manager::SWITCHER,
 			]
 		);
@@ -60,7 +60,7 @@ class Widgets_Integration {
 		$obj->add_control(
 			'enable_default_badge',
 			[
-				'label'     => __( 'Enable Default Badge', 'jet-woo-builder' ),
+				'label'     => __( 'Enable Default Badge', 'jwb-custom-product-badges' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [
@@ -85,7 +85,7 @@ class Widgets_Integration {
 			$obj->add_control(
 				$key . '_styles_heading',
 				[
-					'label'     => __( $value, 'jet-woo-builder' ),
+					'label'     => __( $value, 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::HEADING,
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -96,7 +96,7 @@ class Widgets_Integration {
 			$obj->add_control(
 				$key . '_badge_color',
 				[
-					'label'     => __( 'Color', 'jet-woo-builder' ),
+					'label'     => __( 'Color', 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
@@ -110,7 +110,7 @@ class Widgets_Integration {
 			$obj->add_control(
 				$key . '_badge_bg_color',
 				[
-					'label'     => __( 'Background color', 'jet-woo-builder' ),
+					'label'     => __( 'Background Color', 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',

@@ -1,5 +1,5 @@
 <div class="jwb-custom-product-badges-settings-page jwb-custom-product-badges-settings-page__general">
-	<h3 class="cx-vui-subtitle"><?php _e( 'Badges List', 'jet-woo-builder' ); ?></h3>
+	<h3 class="cx-vui-subtitle"><?php _e( 'Badges List', 'jwb-custom-product-badges' ); ?></h3>
 
 	<ul class="jwb-custom-product-badges-list">
 		<li class="jwb-custom-product-badges-list__item" v-for="(badge, index) in pageOptions.badgesList">
@@ -27,7 +27,7 @@
 		</li>
 	</ul>
 
-	<h3 class="cx-vui-subtitle"><?php _e( 'Add New Badges', 'jet-woo-builder' ); ?></h3>
+	<h3 class="cx-vui-subtitle"><?php _e( 'Add New Badges', 'jwb-custom-product-badges' ); ?></h3>
 
 	<form @submit.prevent="addNewBadge">
 		<input type="text" v-model.trim="inputBadge">

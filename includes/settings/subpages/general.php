@@ -50,7 +50,7 @@ class General extends Page_Module_Base {
 	 * @return string
 	 */
 	public function get_page_name() {
-		return __( 'General Settings', 'jet-woo-builder' );
+		return __( 'General Settings', 'jwb-custom-product-badges' );
 	}
 
 	/**

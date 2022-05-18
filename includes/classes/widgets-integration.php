@@ -15,10 +15,13 @@ class Widgets_Integration {
 		// Register Elementor controls.
 		add_action( 'elementor/element/jet-woo-products/section_general/after_section_end', [ $this, 'register_custom_badge_controls' ] );
 		add_action( 'elementor/element/jet-woo-builder-archive-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ] );
+		add_action( 'elementor/element/jet-single-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ] );
 
 		// Handle custom badge output.
-		add_filter( 'jet-woo-builder/template-functions/product_sale_flash/injection', [ $this, 'enable_custom_badge_injection' ], 10, 2 );
-		add_filter( 'jet-woo-builder/template-functions/product_sale_flash', [ $this, 'get_custom_products_badges' ], 10, 2 );
+		add_filter( 'jet-woo-builder/template-functions/product-sale-flash/on-sale', [ $this, 'enable_custom_badge_display' ], 10, 3 );
+		add_filter( 'jet-woo-builder/templates/single-product/sale-badge/on-sale', [ $this, 'enable_custom_badge_display' ], 10, 3 );
+		add_filter( 'jet-woo-builder/template-functions/product-sale-flash', [ $this, 'get_custom_product_badges' ], 10, 3 );
+		add_filter( 'jet-woo-builder/templates/single-product/sale-badge', [ $this, 'get_custom_product_badges' ], 10, 3 );
 
 		// Extend macros settings list.
 		add_filter( 'jet-woo-builder/jet-woo-builder-archive-sale-badge/macros-settings', [ $this, 'extend_archive_item_macros_settings' ], 10, 2 );
@@ -40,7 +43,12 @@ class Widgets_Integration {
 	 */
 	public function register_custom_badge_controls( $obj ) {
 
-		$badges = Plugin::instance()->tools->get_badges_list();
+		$badges       = Plugin::instance()->tools->get_badges_list();
+		$css_selector = 'div .jet-woo-product-badge.jet-woo-product-badge__';
+
+		if ( is_a( $obj, 'Elementor\Jet_Woo_Builder_Single_Sale_Badge' ) ) {
+			$css_selector = '.jet-woo-builder .onsale.';
+		}
 
 		$obj->start_controls_section(
 			'section_custom_badges',
@@ -99,7 +107,7 @@ class Widgets_Integration {
 					'label'     => __( 'Color', 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'color: {{VALUE}};',
+						'{{WRAPPER}} ' . $css_selector . $key => 'color: {{VALUE}};',
 					],
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -113,7 +121,7 @@ class Widgets_Integration {
 					'label'     => __( 'Background Color', 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} .jet-woo-product-badge.jet-woo-product-badge__' . $key => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} ' . $css_selector . $key => 'background-color: {{VALUE}};',
 					],
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -134,18 +142,25 @@ class Widgets_Integration {
 	 * @since  1.1.0
 	 * @access public
 	 *
-	 * @param bool  $status   Injections status.
-	 * @param array $settings Widget settings list.
+	 * @param bool   $status   Injections status.
+	 * @param array  $settings Widget settings list.
+	 * @param object $product  Product instance.
 	 *
 	 * @return bool
 	 */
-	public function enable_custom_badge_injection( $status, $settings ) {
+	public function enable_custom_badge_display( $status, $settings, $product ) {
 
-		if ( isset( $settings['enable_custom_badges'] ) && filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) ) {
-			return true;
+		$badges = get_post_meta( $product->get_id(), '_jet_woo_builder_badges', true );
+
+		if ( empty( $badges ) ) {
+			return $status;
 		}
 
-		return $status;
+		if ( ! isset( $settings['enable_custom_badges'] ) && ! filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) ) {
+			return $status;
+		}
+
+		return true;
 
 	}
 
@@ -159,12 +174,11 @@ class Widgets_Integration {
 	 *
 	 * @param string $html     Badges element markup.
 	 * @param array  $settings Widget settings list.
+	 * @param object $product  Product instance.
 	 *
-	 * @return mixed|string
+	 * @return string
 	 */
-	public function get_custom_products_badges( $html, $settings ) {
-
-		global $product;
+	public function get_custom_product_badges( $html, $settings, $product ) {
 
 		$custom_badges = isset( $settings['enable_custom_badges'] ) ? filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) : false;
 		$default_badge = isset( $settings['enable_default_badge'] ) ? filter_var( $settings['enable_default_badge'], FILTER_VALIDATE_BOOLEAN ) : false;
@@ -177,12 +191,16 @@ class Widgets_Integration {
 			$html = '';
 		}
 
-		$badges = get_post_meta( $product->get_id() , '_jet_woo_builder_badges', true );
+		$badges = get_post_meta( $product->get_id(), '_jet_woo_builder_badges', true );
 		$badges = Plugin::instance()->tools->get_badges_for_display( $badges );
 
 		if ( ! empty( $badges ) ) {
 			foreach ( $badges as $key => $value ) {
-				$html .= sprintf( '<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $key, $value );
+				if ( isset( $settings['single_badge_text'] ) ) {
+					$html .= sprintf( '<span class="onsale %s">%s</span>', $key, $value );
+				} else {
+					$html .= sprintf( '<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $key, $value );
+				}
 			}
 		}
 

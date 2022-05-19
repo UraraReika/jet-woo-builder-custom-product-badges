@@ -47,10 +47,10 @@ class Widgets_Integration {
 	public function register_custom_badge_controls( $obj ) {
 
 		$badges       = Plugin::instance()->tools->get_badges_list();
-		$css_selector = 'div .jet-woo-product-badge.jet-woo-product-badge__';
+		$css_selector = '.jwb-custom-badge.jet-woo-product-badge.jet-woo-product-badge__';
 
-		if ( is_a( $obj, 'Elementor\Jet_Woo_Builder_Single_Sale_Badge' ) ) {
-			$css_selector = '.jet-woo-builder .onsale.';
+		if ( 'jet-single-sale-badge' === $obj->get_name() ) {
+			$css_selector = '.jwb-custom-badge.onsale.';
 		}
 
 		$obj->start_controls_section(
@@ -234,9 +234,9 @@ class Widgets_Integration {
 		if ( ! empty( $badges ) ) {
 			foreach ( $badges as $key => $value ) {
 				if ( isset( $settings['single_badge_text'] ) ) {
-					$html .= sprintf( '<span class="onsale %s">%s</span>', $key, $value );
+					$html .= sprintf( '<span class="jwb-custom-badge onsale %s">%s</span>', $key, $value );
 				} else {
-					$html .= sprintf( '<div class="jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $key, $value );
+					$html .= sprintf( '<div class="jwb-custom-badge jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $key, $value );
 				}
 			}
 		}

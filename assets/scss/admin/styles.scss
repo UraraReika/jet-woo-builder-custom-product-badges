@@ -43,6 +43,8 @@
 
 		form {
 			margin-top: 13px;
+			display: flex;
+			gap: 2px;
 
 			> * {
 				font-size: 13px;
@@ -55,6 +57,7 @@
 			}
 
 			input {
+				flex: 0 1 80%;
 				background-color: #f4f4f5;
 				color: #7B7E81;
 				border: none;
@@ -68,6 +71,7 @@
 			}
 
 			button {
+				flex: 0 1 20%;
 				background-color: #fff;
 				color: #007CBA;
 				cursor: pointer;

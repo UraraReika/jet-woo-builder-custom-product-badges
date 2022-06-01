@@ -1,7 +1,7 @@
 {
   "name": "jet-woo-builder-custom-product-badges",
   "version": "1.0.0",
-  "description": "Add meta field to single product page in admin area where user can pick badges. Then with Elementor page builder separate style them in widgets. This functionality works in Products Grid and Archive Sale Badge Widgets.",
+  "description": "Custom Product Badges has it all: create and manage products badges, output in multiple widgets, style badges separately and more.",
   "main": "index.js",
   "scripts": {},
   "repository": {

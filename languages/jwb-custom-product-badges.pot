@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JetWooBuilder - Custom Product Badges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-01 11:31+0300\n"
+"POT-Creation-Date: 2022-06-01 19:03+0300\n"
 "PO-Revision-Date: 2018-05-18 18:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: Crocoblock\n"
@@ -23,16 +23,16 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: cherry-framework\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#: assets/js/admin/vue-components.js:55
+#: assets/js/admin/vue-components.js:58
 msgid "This badge already exist!"
 msgstr ""
 
-#: assets/js/admin/vue-components.js:62
+#: assets/js/admin/vue-components.js:69
 #, javascript-format
 msgid "Are you sure you want to delete `%s` badge?."
 msgstr ""
 
-#: includes/classes/meta-fields.php:28 includes/settings/manager.php:72
+#: includes/classes/meta-fields.php:28
 msgid "Custom Product Badges"
 msgstr ""
 
@@ -49,6 +49,7 @@ msgid "New"
 msgstr ""
 
 #: includes/classes/widgets-integration.php:59
+#: includes/settings/subpages/general.php:53
 msgid "Custom Badges"
 msgstr ""
 
@@ -72,23 +73,6 @@ msgstr ""
 msgid "Margin"
 msgstr ""
 
-#: includes/plugin.php:91
-#, php-format
-msgid "\"%s\" requires \"%s\" to be installed and activated."
-msgstr ""
-
-#: includes/plugin.php:92
-msgid "JetWooBuilder - Custom Products Badges"
-msgstr ""
-
-#: includes/plugin.php:93
-msgid "JetWooBuilder"
-msgstr ""
-
-#: includes/plugin.php:195
-msgid "Go to settings"
-msgstr ""
-
 #: includes/rest-api/endpoints/plugin-settings.php:46
 msgid "Server Error"
 msgstr ""
@@ -97,14 +81,19 @@ msgstr ""
 msgid "Settings have been saved"
 msgstr ""
 
-#: includes/settings/subpages/general.php:53
-msgid "General Settings"
+#: jet-woo-builder-custom-product-badges.php:58
+#, php-format
+msgid "\"%s\" requires \"%s\" to be installed and activated."
 msgstr ""
 
-#: templates/admin/general-settings.php:2
+#: jet-woo-builder-custom-product-badges.php:59
+msgid "JetWooBuilder - Custom Products Badges"
+msgstr ""
+
+#: jet-woo-builder-custom-product-badges.php:60
+msgid "JetWooBuilder"
+msgstr ""
+
+#: templates/admin/general.php:5
 msgid "Badges List"
-msgstr ""
-
-#: templates/admin/general-settings.php:30
-msgid "Add New Badges"
 msgstr ""

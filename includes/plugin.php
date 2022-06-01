@@ -65,7 +65,6 @@ class Plugin {
 	 */
 	public function init() {
 		$this->init_components();
-		$this->init_dashboard();
 	}
 
 	/**
@@ -110,48 +109,6 @@ class Plugin {
 	}
 
 	/**
-	 * Init dashboard.
-	 *
-	 * Initialize JWB Custom Product Badges dashboard.
-	 *
-	 * @since  1.1.0
-	 * @access private
-	 */
-	private function init_dashboard() {
-		if ( is_admin() ) {
-			if ( ! class_exists( 'Jet_Dashboard\Dashboard' ) ) {
-				return;
-			}
-
-			$dashboard = \Jet_Dashboard\Dashboard::get_instance();
-
-			$dashboard->init( [
-				'path'           => $dashboard->get_dashboard_path(),
-				'url'            => $dashboard->get_dashboard_url(),
-				'cx_ui_instance' => [ $this, 'dashboard_ui_instance' ],
-				'plugin_data'    => [
-					'slug'         => 'jwb-custom-product-badges',
-					'file'         => 'jet-woo-builder-custom-product-badges/jet-woo-builder-custom-product-badges.php',
-					'version'      => JWB_CUSTOM_PRODUCT_BUDGES_VERSION,
-					'plugin_links' => [
-						[
-							'label'  => __( 'Go to settings', 'jwb-custom-product-badges' ),
-							'url'    => add_query_arg(
-								[
-									'page'    => 'jet-dashboard-settings-page',
-									'subpage' => 'jwb-custom-product-badges-general-settings',
-								],
-								admin_url( 'admin.php' )
-							),
-							'target' => '_self',
-						],
-					],
-				],
-			] );
-		}
-	}
-
-	/**
 	 * Dashboard UI instance.
 	 *
 	 * Get Vue UI Instance for JetDashboard module.
@@ -164,7 +121,7 @@ class Plugin {
 	public function dashboard_ui_instance() {
 		$vue_ui_data = jet_woo_builder()->module_loader->get_included_module_data( 'cherry-x-vue-ui.php' );
 
-		return new CX_Vue_UI( $vue_ui_data );
+		return new \CX_Vue_UI( $vue_ui_data );
 	}
 
 	/**

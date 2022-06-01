@@ -22,7 +22,7 @@ class General extends Page_Module_Base {
 	 * @return string
 	 */
 	public function get_page_slug() {
-		return 'jwb-custom-product-badges-general-settings';
+		return 'jwb-custom-product-badges-general';
 	}
 
 	/**
@@ -50,7 +50,7 @@ class General extends Page_Module_Base {
 	 * @return string
 	 */
 	public function get_page_name() {
-		return __( 'General Settings', 'jwb-custom-product-badges' );
+		return __( 'Custom Badges', 'jwb-custom-product-badges' );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class General extends Page_Module_Base {
 	 * @return string
 	 */
 	public function get_category() {
-		return 'jwb-custom-product-badges';
+		return 'jet-woo-builder-settings';
 	}
 
 	/**
@@ -146,7 +146,7 @@ class General extends Page_Module_Base {
 	 */
 	public function page_templates( $templates = [], $page = false, $subpage = false ) {
 
-		$templates['jwb-custom-product-badges-general-settings'] = JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'templates/admin/general-settings.php';
+		$templates['jwb-custom-product-badges-general'] = JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'templates/admin/general.php';
 
 		return $templates;
 

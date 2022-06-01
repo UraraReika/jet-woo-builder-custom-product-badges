@@ -48,31 +48,14 @@ class Settings {
 	public function __construct() {
 
 		$this->subpage_modules = [
-			'jwb-custom-product-badges-general-settings' => [
+			'jwb-custom-product-badges-general' => [
 				'class' => '\\JWB_CPB\\Settings\\General',
 				'args'  => [],
 			],
 		];
 
-		add_action( 'init', [ $this, 'register_settings_category' ], 10 );
 		add_action( 'init', [ $this, 'init_settings_subpages' ], 10 );
 
-	}
-
-	/**
-	 * Register Category.
-	 *
-	 * Register settings page  main settings category, which holds all settings tabs.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 */
-	public function register_settings_category() {
-		\Jet_Dashboard\Dashboard::get_instance()->module_manager->register_module_category( array(
-			'name'     => __( 'Custom Product Badges', 'jwb-custom-product-badges' ),
-			'slug'     => 'jwb-custom-product-badges',
-			'priority' => 2,
-		) );
 	}
 
 	/**

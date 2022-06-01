@@ -14,6 +14,7 @@ let JWBCPBSettingsMixin = {
 	watch: {
 		pageOptions: {
 			handler( options ) {
+
 				let prepared = {};
 
 				for ( let option in options ) {
@@ -25,6 +26,7 @@ let JWBCPBSettingsMixin = {
 				this.preparedOptions = prepared;
 
 				this.saveOptions();
+
 			},
 			deep: true
 		}
@@ -52,22 +54,29 @@ let JWBCPBSettingsMixin = {
 					this.pageOptions.actionType['value'] = 'add';
 					this.inputBadge = '';
 				} else {
-					alert( __( 'This badge already exist!', 'jwb-custom-product-badges' ) );
+					this.$CXNotice.add( {
+						message: __( 'This badge already exist!', 'jwb-custom-product-badges' ),
+						type: 'error',
+						duration: 3000,
+					} );
 				}
 
 			}
 		},
 
 		deleteBadge: function ( value, label ) {
+
 			let confirmDeletion = confirm( wp.i18n.sprintf( __( 'Are you sure you want to delete `%s` badge?.', 'jwb-custom-product-badges' ), label ) );
 
 			if ( confirmDeletion ) {
 				this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
 				this.pageOptions.actionType['value'] = 'remove';
 			}
+
 		},
 
 		saveOptions: function() {
+
 			let self = this;
 
 			self.savingStatus = true;
@@ -77,13 +86,13 @@ let JWBCPBSettingsMixin = {
 				url: window.JWBCPBSettingsConfig.settingsApiUrl,
 				dataType: 'json',
 				data: self.preparedOptions,
-				beforeSend: function( jqXHR, ajaxSettings ) {
-
+				beforeSend: function() {
 					if ( null !== self.ajaxSaveHandler ) {
 						self.ajaxSaveHandler.abort();
 					}
 				},
-				success: function( response, textStatus, jqXHR ) {
+				success: function( response ) {
+
 					self.savingStatus = false;
 
 					if ( 'success' === response.status ) {
@@ -101,13 +110,15 @@ let JWBCPBSettingsMixin = {
 							duration: 3000,
 						} );
 					}
+
 				}
 			} );
+
 		},
 	}
 }
 
-Vue.component( 'jwb-custom-product-badges-general-settings', {
-	template: '#jet-dashboard-jwb-custom-product-badges-general-settings',
+Vue.component( 'jwb-custom-product-badges-general', {
+	template: '#jet-dashboard-jwb-custom-product-badges-general',
 	mixins: [ JWBCPBSettingsMixin ],
 } );

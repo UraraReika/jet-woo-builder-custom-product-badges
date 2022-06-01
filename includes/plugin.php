@@ -30,36 +30,6 @@ class Plugin {
 	public static $instance = null;
 
 	/**
-	 * Framework.
-	 *
-	 * Holds the plugin framework instance, responsible for loading framework modules.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 *
-	 * @var \JWB_Custom_Product_Badges_CX_Loader
-	 */
-	public $framework;
-
-	/**
-	 * Meta fields.
-	 *
-	 * Holds meta fields instance, responsible for handling products meta fields and meta data.
-	 *
-	 * @var Meta_Fields
-	 */
-	public $meta_fields;
-
-	/**
-	 * Integration.
-	 *
-	 * Holds integration instance, responsible for JetWooBuilder widgets integration.
-	 *
-	 * @var Widgets_Integration
-	 */
-	public $widgets_integration;
-
-	/**
 	 * Tools.
 	 *
 	 * Holds tools class instance.
@@ -78,35 +48,12 @@ class Plugin {
 	 */
 	private function __construct() {
 
-		add_action( 'after_setup_theme', [ $this, 'framework_loader' ], -20 );
-
 		add_action( 'plugins_loaded', [ $this, 'required_plugins_loaded' ] );
 
 		add_action( 'init', [ $this, 'init' ], -999 );
 
 		register_activation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'activation' ] );
 		register_deactivation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'deactivation' ] );
-
-	}
-
-	/**
-	 * Framework loader.
-	 *
-	 * Load JWB Custom Product Badges framework components.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 */
-	public function framework_loader() {
-
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/loader.php';
-
-		$this->framework = new \JWB_Custom_Product_Badges_CX_Loader( [
-			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/interface-builder/cherry-x-interface-builder.php',
-			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/post-meta/cherry-x-post-meta.php',
-			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/db-updater/cherry-x-db-updater.php',
-			JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'framework/jet-dashboard/jet-dashboard.php',
-		] );
 
 	}
 
@@ -169,7 +116,7 @@ class Plugin {
 	 *
 	 * Loads the translation files.
 	 *
-	 * @since 1.1.0
+	 * @since  1.1.0
 	 * @access public
 	 *
 	 * @return void
@@ -194,10 +141,8 @@ class Plugin {
 		if ( is_admin() ) {
 			new Settings();
 
-			// Init DB upgrader.
 			require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/db-upgrader.php';
-
-			DB_Upgrader::instance()->init();
+			new DB_Upgrader();
 		}
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/meta-fields.php';
@@ -206,10 +151,10 @@ class Plugin {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/hooks-handler.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/assets.php';
 
-		$this->meta_fields         = new Meta_Fields();
-		$this->widgets_integration = new Widgets_Integration();
-		$this->tools               = new Tools();
+		$this->tools = new Tools();
 
+		new Meta_Fields();
+		new Widgets_Integration();
 		new Hooks_Handler();
 		new Assets();
 
@@ -231,34 +176,35 @@ class Plugin {
 	 */
 	private function init_dashboard() {
 		if ( is_admin() ) {
-			$dashboard_framework_data = $this->framework->get_included_module_data( 'jet-dashboard.php' );
-			$dashboard                = \Jet_Dashboard\Dashboard::get_instance();
+			if ( ! class_exists( 'Jet_Dashboard\Dashboard' ) ) {
+				return;
+			}
 
-			$dashboard->init(
-				[
-					'path'           => $dashboard_framework_data['path'],
-					'url'            => $dashboard_framework_data['url'],
-					'cx_ui_instance' => [ $this, 'dashboard_ui_instance' ],
-					'plugin_data'    => [
-						'slug'         => 'jwb-custom-product-badges',
-						'file'         => 'jet-woo-builder-custom-product-badges/jet-woo-builder-custom-product-badges.php',
-						'version'      => JWB_CUSTOM_PRODUCT_BUDGES_VERSION,
-						'plugin_links' => [
-							[
-								'label'  => __( 'Go to settings', 'jwb-custom-product-badges' ),
-								'url'    => add_query_arg(
-									[
-										'page'    => 'jet-dashboard-settings-page',
-										'subpage' => 'jwb-custom-product-badges-general-settings',
-									],
-									admin_url( 'admin.php' )
-								),
-								'target' => '_self',
-							],
+			$dashboard = \Jet_Dashboard\Dashboard::get_instance();
+
+			$dashboard->init( [
+				'path'           => $dashboard->get_dashboard_path(),
+				'url'            => $dashboard->get_dashboard_url(),
+				'cx_ui_instance' => [ $this, 'dashboard_ui_instance' ],
+				'plugin_data'    => [
+					'slug'         => 'jwb-custom-product-badges',
+					'file'         => 'jet-woo-builder-custom-product-badges/jet-woo-builder-custom-product-badges.php',
+					'version'      => JWB_CUSTOM_PRODUCT_BUDGES_VERSION,
+					'plugin_links' => [
+						[
+							'label'  => __( 'Go to settings', 'jwb-custom-product-badges' ),
+							'url'    => add_query_arg(
+								[
+									'page'    => 'jet-dashboard-settings-page',
+									'subpage' => 'jwb-custom-product-badges-general-settings',
+								],
+								admin_url( 'admin.php' )
+							),
+							'target' => '_self',
 						],
 					],
-				]
-			);
+				],
+			] );
 		}
 	}
 
@@ -273,11 +219,9 @@ class Plugin {
 	 * @return object
 	 */
 	public function dashboard_ui_instance() {
-
-		$vue_ui_data = $this->framework->get_included_module_data( 'cherry-x-vue-ui.php' );
+		$vue_ui_data = jet_woo_builder()->module_loader->get_included_module_data( 'cherry-x-vue-ui.php' );
 
 		return new CX_Vue_UI( $vue_ui_data );
-
 	}
 
 	/**

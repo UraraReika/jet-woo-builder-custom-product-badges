@@ -8,37 +8,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DB_Upgrader {
 
-	/**
-	 * Instance.
-	 *
-	 * A reference to an instance of this class.
-	 *
-	 * @since  1.1.0
-	 * @access private
-	 *
-	 * @var    object
-	 */
-	private static $instance = null;
+	public function __construct() {
 
-	public function init() {
-		$this->init_upgrader();
-	}
+		$db_updater_data = jet_woo_builder()->module_loader->get_included_module_data( 'cherry-x-db-updater.php' );
 
-	/**
-	 * Init upgrader.
-	 *
-	 * Initialize upgrader module.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function init_upgrader() {
 		new \CX_Db_Updater(
 			[
+				'path'      => $db_updater_data['path'],
+				'url'       => $db_updater_data['url'],
 				'slug'      => 'jwb-custom-product-badges',
-				'version'   => '1.5.0',
+				'version'   => '1.1.0',
 				'callbacks' => [
 					'1.1.0' => [
 						[ $this, 'update_db_1_1_0' ],
@@ -46,6 +25,7 @@ class DB_Upgrader {
 				],
 			]
 		);
+
 	}
 
 	/**
@@ -75,26 +55,6 @@ class DB_Upgrader {
 
 			update_option( Settings::get_instance()->key, $settings );
 		}
-
-	}
-
-	/**
-	 * Instance.
-	 *
-	 * Returns the instance.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 *
-	 * @return object
-	 */
-	public static function instance() {
-
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
-
-		return self::$instance;
 
 	}
 

@@ -56,7 +56,7 @@ class Meta_Fields {
 	 */
 	public function get_builder() {
 
-		$builder_data = Plugin::instance()->framework->get_included_module_data( 'cherry-x-interface-builder.php' );
+		$builder_data = jet_woo_builder()->module_loader->get_included_module_data( 'cherry-x-interface-builder.php' );
 
 		return new \CX_Interface_Builder( [
 			'path' => $builder_data['path'],

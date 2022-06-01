@@ -48,52 +48,10 @@ class Plugin {
 	 */
 	private function __construct() {
 
-		add_action( 'plugins_loaded', [ $this, 'required_plugins_loaded' ] );
-
 		add_action( 'init', [ $this, 'init' ], -999 );
 
 		register_activation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'activation' ] );
 		register_deactivation_hook( JWB_CUSTOM_PRODUCT_BUDGES__FILE__, [ $this, 'deactivation' ] );
-
-	}
-
-	/**
-	 * Required plugins loaded.
-	 *
-	 * Check if required plugins installed and activated.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 */
-	public function required_plugins_loaded() {
-		if ( ! function_exists( 'jet_woo_builder' ) ) {
-			add_action( 'admin_notices', [ $this, 'admin_notice_missing_jet_woo_builder_plugin' ] );
-
-			return;
-		}
-	}
-
-	/**
-	 * Admin notice.
-	 *
-	 * Show missing JetWooBuilder plugin notice.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 */
-	public function admin_notice_missing_jet_woo_builder_plugin() {
-
-		if ( isset( $_GET['activate'] ) ) {
-			unset( $_GET['activate'] );
-		}
-
-		$message = sprintf(
-			__( '"%s" requires "%s" to be installed and activated.', 'jwb-custom-product-badges' ),
-			'<strong>' . __( 'JetWooBuilder - Custom Products Badges', 'jwb-custom-product-badges' ) . '</strong>',
-			'<strong>' . __( 'JetWooBuilder', 'jwb-custom-product-badges' ) . '</strong>'
-		);
-
-		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
 
 	}
 
@@ -106,23 +64,8 @@ class Plugin {
 	 * @access public
 	 */
 	public function init() {
-		$this->lang();
 		$this->init_components();
 		$this->init_dashboard();
-	}
-
-	/**
-	 * Lang.
-	 *
-	 * Loads the translation files.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function lang() {
-		load_plugin_textdomain( 'jwb-custom-product-badges', false, JWB_CUSTOM_PRODUCT_BUDGES_PATH . '/languages' );
 	}
 
 	/**

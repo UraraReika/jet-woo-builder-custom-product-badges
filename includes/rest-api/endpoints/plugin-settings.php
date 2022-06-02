@@ -9,7 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Plugin_Settings extends Base {
 
 	/**
-	 * Returns query method
+	 * Method.
+	 *
+	 * Returns query method.
+	 *
+	 * @since  1.1.0
+	 * @access public
 	 *
 	 * @return string
 	 */
@@ -18,7 +23,12 @@ class Plugin_Settings extends Base {
 	}
 
 	/**
-	 * Returns route name
+	 * Name.
+	 *
+	 * Returns route name.
+	 *
+	 * @since  1.1.0
+	 * @access public
 	 *
 	 * @return string
 	 */
@@ -27,9 +37,14 @@ class Plugin_Settings extends Base {
 	}
 
 	/**
-	 * Returns plugin settings callback
+	 * Callback.
 	 *
-	 * @param  $request
+	 * Returns plugin settings callback.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @param object $request Parameters list.
 	 *
 	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */

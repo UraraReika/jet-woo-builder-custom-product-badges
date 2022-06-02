@@ -9,23 +9,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class Base {
 
 	/**
-	 * Returns route name
+	 * Name.
+	 *
+	 * Returns route name.
+	 *
+	 * @since 1.1.0
+	 * @abstract
 	 *
 	 * @return string
 	 */
 	abstract function get_name();
 
 	/**
-	 * API callback
+	 * Callback.
 	 *
-	 * @param $request
+	 * API callback.
+	 *
+	 * @since 1.1.0
+	 * @abstract
+	 *
+	 * @param object $request Request parameters.
 	 *
 	 * @return void
 	 */
 	abstract function callback( $request );
 
 	/**
-	 * Returns endpoint request method - GET/POST/PUT/DELETE
+	 * Methods.
+	 *
+	 * Returns endpoint request method - GET/POST/PUT/DELETE.
+	 *
+	 * @since  1.1.0
+	 * @access public
 	 *
 	 * @return string
 	 */
@@ -34,7 +49,12 @@ abstract class Base {
 	}
 
 	/**
-	 * Check user access to current end-point
+	 * Permission callback.
+	 *
+	 * Check user access to current end-point.
+	 *
+	 * @since  1.1.0
+	 * @access public
 	 *
 	 * @return bool
 	 */
@@ -43,11 +63,15 @@ abstract class Base {
 	}
 
 	/**
-	 * Get query param. Regex with query parameters
+	 * Query parameters.
+	 *
+	 * Get query param. Regex with query parameters.
 	 *
 	 * Example:
-	 *
 	 * (?P<id>[\d]+)/(?P<meta_key>[\w-]+)
+	 *
+	 * @since  1.1.0
+	 * @access public
 	 *
 	 * @return string
 	 */
@@ -56,7 +80,12 @@ abstract class Base {
 	}
 
 	/**
-	 * Returns arguments config
+	 * Arguments.
+	 *
+	 * Returns arguments config.
+	 *
+	 * @since  1.1.0
+	 * @access public
 	 *
 	 * @return array
 	 */

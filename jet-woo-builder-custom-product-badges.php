@@ -54,10 +54,16 @@ function jwbcpb_admin_notice_missing_required_plugin() {
 		unset( $_GET['activate'] );
 	}
 
+	$jwb_link = sprintf(
+		'<a href="%s">%s</a>',
+		admin_url() . 'admin.php?page=jet-dashboard-license-page',
+		'<strong>' . __( 'JetWooBuilder', 'jwb-custom-product-badges' ) . '</strong>'
+	);
+
 	$message = sprintf(
 		__( '"%s" requires "%s" to be installed and activated.', 'jwb-custom-product-badges' ),
 		'<strong>' . __( 'JetWooBuilder - Custom Products Badges', 'jwb-custom-product-badges' ) . '</strong>',
-		'<strong>' . __( 'JetWooBuilder', 'jwb-custom-product-badges' ) . '</strong>'
+		$jwb_link
 	);
 
 	printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );

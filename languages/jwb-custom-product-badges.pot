@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JetWooBuilder - Custom Product Badges\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-01 19:03+0300\n"
+"POT-Creation-Date: 2022-06-03 13:53+0300\n"
 "PO-Revision-Date: 2018-05-18 18:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: Crocoblock\n"
@@ -23,13 +23,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: cherry-framework\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#: assets/js/admin/vue-components.js:58
+#: assets/js/admin/vue-components.js:59
 msgid "This badge already exist!"
-msgstr ""
-
-#: assets/js/admin/vue-components.js:69
-#, javascript-format
-msgid "Are you sure you want to delete `%s` badge?."
 msgstr ""
 
 #: includes/classes/meta-fields.php:28
@@ -48,52 +43,64 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: includes/classes/widgets-integration.php:59
+#: includes/classes/widgets-integration.php:55
 #: includes/settings/subpages/general.php:53
 msgid "Custom Badges"
 msgstr ""
 
-#: includes/classes/widgets-integration.php:66
+#: includes/classes/widgets-integration.php:62
 msgid "Enable Custom Badges"
 msgstr ""
 
-#: includes/classes/widgets-integration.php:74
+#: includes/classes/widgets-integration.php:70
 msgid "Enable Default Badge"
 msgstr ""
 
-#: includes/classes/widgets-integration.php:110
+#: includes/classes/widgets-integration.php:106
 msgid "Color"
 msgstr ""
 
-#: includes/classes/widgets-integration.php:124
+#: includes/classes/widgets-integration.php:120
 msgid "Background Color"
 msgstr ""
 
-#: includes/classes/widgets-integration.php:161
+#: includes/classes/widgets-integration.php:157
 msgid "Margin"
 msgstr ""
 
-#: includes/rest-api/endpoints/plugin-settings.php:46
+#: includes/rest-api/endpoints/plugin-settings.php:61
 msgid "Server Error"
 msgstr ""
 
-#: includes/rest-api/endpoints/plugin-settings.php:60
+#: includes/rest-api/endpoints/plugin-settings.php:75
 msgid "Settings have been saved"
-msgstr ""
-
-#: jet-woo-builder-custom-product-badges.php:58
-#, php-format
-msgid "\"%s\" requires \"%s\" to be installed and activated."
-msgstr ""
-
-#: jet-woo-builder-custom-product-badges.php:59
-msgid "JetWooBuilder - Custom Products Badges"
 msgstr ""
 
 #: jet-woo-builder-custom-product-badges.php:60
 msgid "JetWooBuilder"
 msgstr ""
 
+#: jet-woo-builder-custom-product-badges.php:64
+#, php-format
+msgid "\"%s\" requires \"%s\" to be installed and activated."
+msgstr ""
+
+#: jet-woo-builder-custom-product-badges.php:65
+msgid "JetWooBuilder - Custom Products Badges"
+msgstr ""
+
 #: templates/admin/general.php:5
 msgid "Badges List"
+msgstr ""
+
+#: templates/admin/general.php:42
+msgid "Are you sure?"
+msgstr ""
+
+#: templates/admin/general.php:46
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/general.php:50
+msgid "No"
 msgstr ""

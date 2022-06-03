@@ -56,6 +56,24 @@ class DB_Upgrader {
 			update_option( Settings::get_instance()->key, $settings );
 		}
 
+		$this->clear_elementor_cache();
+
+	}
+
+	/**
+	 * Clear elementor cache.
+	 *
+	 * Clear elementor plugin editor cache.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function clear_elementor_cache() {
+		if ( class_exists( 'Elementor\Plugin' ) ) {
+			\Elementor\Plugin::$instance->files_manager->clear_cache();
+		}
 	}
 
 }

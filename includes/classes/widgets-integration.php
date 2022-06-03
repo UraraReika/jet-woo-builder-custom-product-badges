@@ -47,11 +47,7 @@ class Widgets_Integration {
 	public function register_custom_badge_controls( $obj ) {
 
 		$badges       = Plugin::instance()->tools->get_badges_list();
-		$css_selector = '.jwb-custom-badge.jet-woo-product-badge.jet-woo-product-badge__';
-
-		if ( 'jet-single-sale-badge' === $obj->get_name() ) {
-			$css_selector = '.jwb-custom-badge.onsale.';
-		}
+		$css_selector = 'jet-single-sale-badge' === $obj->get_name() ? '.onsale' : '.jet-woo-product-badge';
 
 		$obj->start_controls_section(
 			'section_custom_badges',
@@ -110,7 +106,7 @@ class Widgets_Integration {
 					'label'     => __( 'Color', 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} ' . $css_selector . $key => 'color: {{VALUE}};',
+						"{{WRAPPER}} {$css_selector}.jwb-custom-badge.jwb-custom-badge__{$key}" => 'color: {{VALUE}};',
 					],
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -124,7 +120,7 @@ class Widgets_Integration {
 					'label'     => __( 'Background Color', 'jwb-custom-product-badges' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}} ' . $css_selector . $key => 'background-color: {{VALUE}};',
+						"{{WRAPPER}} {$css_selector}.jwb-custom-badge.jwb-custom-badge__{$key}" => 'background-color: {{VALUE}};',
 					],
 					'condition' => [
 						'enable_custom_badges!' => '',
@@ -234,9 +230,9 @@ class Widgets_Integration {
 		if ( ! empty( $badges ) ) {
 			foreach ( $badges as $key => $value ) {
 				if ( isset( $settings['single_badge_text'] ) ) {
-					$html .= sprintf( '<span class="jwb-custom-badge onsale %s">%s</span>', $key, $value );
+					$html .= sprintf( '<span class="onsale jwb-custom-badge jwb-custom-badge__%s">%s</span>', $key, $value );
 				} else {
-					$html .= sprintf( '<div class="jwb-custom-badge jet-woo-product-badge jet-woo-product-badge__%s">%s</div>', $key, $value );
+					$html .= sprintf( '<div class="jet-woo-product-badge jwb-custom-badge jwb-custom-badge__%s">%s</div>', $key, $value );
 				}
 			}
 		}

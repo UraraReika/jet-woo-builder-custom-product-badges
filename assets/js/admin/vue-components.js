@@ -8,6 +8,7 @@ let JWBCPBSettingsMixin = {
 			preparedOptions: {},
 			savingStatus: false,
 			ajaxSaveHandler: null,
+			deleteBadgeTrigger: null
 		};
 	},
 
@@ -64,15 +65,13 @@ let JWBCPBSettingsMixin = {
 			}
 		},
 
-		deleteBadge: function ( value, label ) {
+		confirmDeleteBadge: function( badge ) {
+			this.deleteBadgeTrigger = badge;
+		},
 
-			let confirmDeletion = confirm( wp.i18n.sprintf( __( 'Are you sure you want to delete `%s` badge?.', 'jwb-custom-product-badges' ), label ) );
-
-			if ( confirmDeletion ) {
-				this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
-				this.pageOptions.actionType['value'] = 'remove';
-			}
-
+		deleteBadge: function ( value ) {
+			this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
+			this.pageOptions.actionType['value'] = 'remove';
 		},
 
 		saveOptions: function() {

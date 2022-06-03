@@ -86,6 +86,21 @@
 				@include list-item;
 
 				cursor: default;
+
+				&__actions {
+					position: relative;
+
+					.cx-vui-tooltip {
+						left: 50%;
+						width: 110px;
+						box-sizing: border-box;
+						transform: translateX(-50%);
+
+						span {
+							cursor: pointer;
+						}
+					}
+				}
 			}
 		}
 	}

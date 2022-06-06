@@ -176,12 +176,12 @@ class Widgets_Integration {
 	 * @access public
 	 *
 	 * @param bool   $status   Injections status.
-	 * @param array  $settings Widget settings list.
 	 * @param object $product  Product instance.
+	 * @param array  $settings Widget settings list.
 	 *
 	 * @return bool
 	 */
-	public function enable_custom_badge_display( $status, $settings, $product ) {
+	public function enable_custom_badge_display( $status, $product, $settings ) {
 
 		$badges = get_post_meta( $product->get_id(), '_jet_woo_builder_badges', true );
 
@@ -206,12 +206,12 @@ class Widgets_Integration {
 	 * @access public
 	 *
 	 * @param string $html     Badges element markup.
-	 * @param array  $settings Widget settings list.
 	 * @param object $product  Product instance.
+	 * @param array  $settings Widget settings list.
 	 *
 	 * @return string
 	 */
-	public function get_custom_product_badges( $html, $settings, $product ) {
+	public function get_custom_product_badges( $html, $product, $settings ) {
 
 		$custom_badges = isset( $settings['enable_custom_badges'] ) ? filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) : false;
 		$default_badge = isset( $settings['enable_default_badge'] ) ? filter_var( $settings['enable_default_badge'], FILTER_VALIDATE_BOOLEAN ) : false;

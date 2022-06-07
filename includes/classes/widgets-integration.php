@@ -225,15 +225,18 @@ class Widgets_Integration {
 		}
 
 		$badges = get_post_meta( $product->get_id(), '_jet_woo_builder_badges', true );
+
+		if ( empty( $badges ) ) {
+			return $html;
+		}
+
 		$badges = Plugin::instance()->tools->get_badges_for_display( $badges );
 
-		if ( ! empty( $badges ) ) {
-			foreach ( $badges as $key => $value ) {
-				if ( isset( $settings['single_badge_text'] ) ) {
-					$html .= sprintf( '<span class="onsale jwb-custom-badge jwb-custom-badge__%s">%s</span>', $key, $value );
-				} else {
-					$html .= sprintf( '<div class="jet-woo-product-badge jwb-custom-badge jwb-custom-badge__%s">%s</div>', $key, $value );
-				}
+		foreach ( $badges as $key => $value ) {
+			if ( isset( $settings['single_badge_text'] ) ) {
+				$html .= sprintf( '<span class="onsale jwb-custom-badge jwb-custom-badge__%s">%s</span>', $key, $value );
+			} else {
+				$html .= sprintf( '<div class="jet-woo-product-badge jwb-custom-badge jwb-custom-badge__%s">%s</div>', $key, $value );
 			}
 		}
 

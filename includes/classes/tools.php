@@ -11,7 +11,7 @@ class Tools {
 	/**
 	 * Predefined badges list.
 	 *
-	 * Returns list of predefined custom badges.
+	 * Returns list of predefined custom badges, that can be extended with hook..
 	 *
 	 * @since  1.1.0
 	 * @access public
@@ -36,7 +36,7 @@ class Tools {
 	/**
 	 * Badges list.
 	 *
-	 * Returns list of custom badges, than can be extended with hook.
+	 * Returns list of custom badges.
 	 *
 	 * @since  1.1.0
 	 * @access public

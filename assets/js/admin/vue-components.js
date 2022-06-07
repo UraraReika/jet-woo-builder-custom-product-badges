@@ -20,7 +20,7 @@ let JWBCPBSettingsMixin = {
 
 				for ( let option in options ) {
 					if ( options.hasOwnProperty( option ) ) {
-						prepared[ option ] = Array.isArray( options[option] ) ? options[option] : options[option]['value'];
+						prepared[ option ] = options[option]['value'] ?  options[option]['value'] : options[option];
 					}
 				}
 

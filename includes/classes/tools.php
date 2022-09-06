@@ -26,7 +26,7 @@ class Tools {
 			'new'        => __( 'New', 'jwb-custom-product-badges' ),
 		];
 
-		$deprecated_hook = 'jet-woo-builder-cpb/integration/badges';
+		$deprecated_hook  = 'jet-woo-builder-cpb/integration/badges';
 		$replacement_hook = 'jwb-custom-product-badges/tools/badges-list';
 
 		return apply_filters_deprecated( $deprecated_hook, [ $badges ], '1.1.0', $replacement_hook );
@@ -75,7 +75,7 @@ class Tools {
 	public function get_badges_for_display( $badges ) {
 
 		$badges_list = $this->get_badges_list();
-		$result    = [];
+		$result      = [];
 
 		foreach ( $badges as $badge ) {
 			if ( isset( $badges_list[ $badge ] ) ) {
@@ -99,17 +99,12 @@ class Tools {
 	 */
 	public function get_localize_data() {
 
-		$badges   = [];
 		$settings = get_option( Settings::get_instance()->key, [] );
-
-		if ( $settings ) {
-			$badges = $settings['badgesList'];
-		}
 
 		return [
 			'settingsApiUrl' => get_rest_url() . 'jwb-custom-product-badges-api/v1/plugin-settings',
 			'settingsData'   => [
-				'badgesList' => $badges,
+				'badgesList' => $settings ? $settings['badgesList'] : [],
 				'actionType' => [
 					'value' => 'add',
 				],

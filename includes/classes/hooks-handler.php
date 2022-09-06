@@ -9,7 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Hooks_Handler {
 
 	public function __construct() {
-		add_action( 'jwb-custom-product-badges/rest-api/endpoints/plugin-settings/after-settings-update', [ $this, 'handle_plugin_settings' ], 10, 1 );
+		add_action(
+			'jwb-custom-product-badges/rest-api/endpoints/plugin-settings/after-settings-update',
+			[ $this, 'handle_plugin_settings' ],
+			10, 1
+		);
 	}
 
 	/**

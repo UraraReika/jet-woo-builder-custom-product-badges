@@ -13,24 +13,65 @@ class Widgets_Integration {
 	public function __construct() {
 
 		// Register Elementor controls.
-		add_action( 'elementor/element/jet-woo-products/section_general/after_section_end', [ $this, 'register_custom_badge_controls' ] );
-		add_action( 'elementor/element/jet-woo-builder-archive-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ] );
-		add_action( 'elementor/element/jet-single-sale-badge/section_badge_content/after_section_end', [ $this, 'register_custom_badge_controls' ] );
+		add_action(
+			'elementor/element/jet-woo-products/section_general/after_section_end',
+			[ $this, 'register_custom_badge_controls' ]
+		);
+
+		add_action(
+			'elementor/element/jet-woo-builder-archive-sale-badge/section_badge_content/after_section_end',
+			[ $this, 'register_custom_badge_controls' ]
+		);
+
+		add_action(
+			'elementor/element/jet-single-sale-badge/section_badge_content/after_section_end',
+			[ $this, 'register_custom_badge_controls' ]
+		);
 
 		// Additional controls injections.
-		add_action( 'elementor/element/jet-single-sale-badge/section_single_badge_style/before_section_end', [ $this, 'inject_additional_single_product_badge_style_controls' ], 10, 2 );
+		add_action(
+			'elementor/element/jet-single-sale-badge/section_single_badge_style/before_section_end',
+			[ $this, 'inject_additional_single_product_badge_style_controls' ],
+			10, 2
+		);
 
 		// Handle custom badge output.
-		add_filter( 'jet-woo-builder/template-functions/product-sale-flash/on-sale', [ $this, 'enable_custom_badge_display' ], 10, 3 );
-		add_filter( 'jet-woo-builder/templates/single-product/sale-badge/on-sale', [ $this, 'enable_custom_badge_display' ], 10, 3 );
-		add_filter( 'jet-woo-builder/template-functions/product-sale-flash', [ $this, 'get_custom_product_badges' ], 10, 3 );
-		add_filter( 'jet-woo-builder/templates/single-product/sale-badge', [ $this, 'get_custom_product_badges' ], 10, 3 );
+		add_filter(
+			'jet-woo-builder/template-functions/product-sale-flash/on-sale',
+			[ $this, 'enable_custom_badge_display' ],
+			10, 3
+		);
+
+		add_filter(
+			'jet-woo-builder/templates/single-product/sale-badge/on-sale',
+			[ $this, 'enable_custom_badge_display' ],
+			10, 3
+		);
+
+		add_filter(
+			'jet-woo-builder/template-functions/product-sale-flash',
+			[ $this, 'get_custom_product_badges' ],
+			10, 3
+		);
+
+		add_filter(
+			'jet-woo-builder/templates/single-product/sale-badge',
+			[ $this, 'get_custom_product_badges' ],
+			10, 3
+		);
 
 		// Extend macros settings list.
-		add_filter( 'jet-woo-builder/jet-woo-builder-archive-sale-badge/macros-settings', [ $this, 'extend_archive_item_macros_settings' ], 10, 2 );
+		add_filter(
+			'jet-woo-builder/jet-woo-builder-archive-sale-badge/macros-settings',
+			[ $this, 'extend_archive_item_macros_settings' ],
+			10, 2
+		);
 
 		// Extend JetSmartFilters providers settings list.
-		add_filter( 'jet-smart-filters/providers/jet-woo-products-grid/settings-list', [ $this, 'extend_providers_settings' ] );
+		add_filter(
+			'jet-smart-filters/providers/jet-woo-products-grid/settings-list',
+			[ $this, 'extend_providers_settings' ]
+		);
 
 	}
 

@@ -53,6 +53,69 @@
 					</div>
 				</li>
 			</ul>
+
+			<cx-vui-component-wrapper
+				:wrapper-css="[ 'query-fullwidth' ]"
+			>
+				<div class="cx-vui-inner-panel query-panel">
+					<div class="cx-vui-component__label"><?php _e( 'Display Conditions', 'jwb-custom-product-badges' ); ?></div>
+					<cx-vui-repeater
+						button-label="<?php _e( 'Add New Display Condition', 'jwb-custom-product-badges' ); ?>"
+						button-style="accent"
+						button-size="mini"
+						v-model="conditions"
+						@add-new-item="addNewField( $event, [], conditions )"
+					>
+						<cx-vui-repeater-item
+							v-for="( condition, index ) in conditions"
+							:title="conditions[ index ]"
+							:subtitle="conditions[ index ]"
+							:collapsed="isCollapsed( condition )"
+							:index="index"
+							@clone-item="cloneField( $event, condition._id, conditions )"
+							@delete-item="deleteField( $event, condition._id, conditions )"
+							:key="condition._id"
+						>
+							<cx-vui-select
+								label="<?php _e( 'Order By', 'jet-engine' ); ?>"
+								description="<?php _e( 'Sort retrieved posts by selected parameter', 'jet-engine' ); ?>"
+								:wrapper-css="[ 'equalwidth' ]"
+								:options-list="[
+										{
+											value: 'ASC',
+											label: 'From lowest to highest values (1, 2, 3; a, b, c)',
+										},
+										{
+											value: 'DESC',
+											label: 'From highest to lowest values (3, 2, 1; c, b, a)',
+										},
+									]"
+								size="fullwidth"
+								:value="conditions[ index ].badges"
+								@input="setFieldProp( condition._id, 'badges', $event, conditions )"
+							></cx-vui-select>
+							<cx-vui-select
+								label="<?php _e( 'Order', 'jet-engine' ); ?>"
+								description="<?php _e( 'Designates the ascending or descending order of the `Order By` parameter', 'jet-engine' ); ?>"
+								:wrapper-css="[ 'equalwidth' ]"
+								:options-list="[
+										{
+											value: 'ASC',
+											label: 'From lowest to highest values (1, 2, 3; a, b, c)',
+										},
+										{
+											value: 'DESC',
+											label: 'From highest to lowest values (3, 2, 1; c, b, a)',
+										},
+									]"
+								size="fullwidth"
+								:value="conditions[ index ].products"
+								@input="setFieldProp( condition._id, 'products', $event, conditions )"
+							></cx-vui-select>
+						</cx-vui-repeater-item>
+					</cx-vui-repeater>
+				</div>
+			</cx-vui-component-wrapper>
 		</div>
 	</div>
 </div>

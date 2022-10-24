@@ -8,7 +8,8 @@ let JWBCPBSettingsMixin = {
 			preparedOptions: {},
 			savingStatus: false,
 			ajaxSaveHandler: null,
-			deleteBadgeTrigger: null
+			deleteBadgeTrigger: null,
+			conditions: []
 		};
 	},
 
@@ -114,6 +115,89 @@ let JWBCPBSettingsMixin = {
 			} );
 
 		},
+
+		addNewField: function( event, props, parent, callback ) {
+
+			props = props || [];
+
+			var field = {};
+
+			for (var i = 0; i < props.length; i++) {
+				field[ props[ i ] ] = '';
+			}
+
+			field._id = Math.round( Math.random() * 1000000 );
+			field.collapsed = false;
+
+			parent.push( field );
+
+			if ( callback && 'function' === typeof callback ) {
+				callback( field, parent );
+			}
+
+		},
+		setFieldProp: function( id, key, value, parent ) {
+
+			let index = this.searchByID( id, parent );
+
+			if ( false === index ) {
+				return;
+			}
+
+			let field = parent[ index ];
+
+			field[ key ] = value;
+
+			parent.splice( index, 1, field );
+
+		},
+		cloneField: function( index, id, parent, callback ) {
+
+			let field = JSON.parse( JSON.stringify( parent[ index ] ) );
+
+			field.collapsed = false;
+			field._id = Math.round( Math.random() * 1000000 );
+
+			parent.splice( index + 1, 0, field );
+
+			if ( callback && 'function' === typeof callback ) {
+				callback( field, parent, id );
+			}
+
+		},
+		deleteField: function( index, id, parent, callback ) {
+
+			index = this.searchByID( id, parent );
+
+			if ( false === index ) {
+				return;
+			}
+
+			parent.splice( index, 1 );
+
+			if ( callback && 'function' === typeof callback ) {
+				callback( id, index, parent );
+			}
+
+		},
+		isCollapsed: function( parent ) {
+			if ( undefined === parent.collapsed || true === parent.collapsed ) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		searchByID: function( id, list ) {
+
+			for ( var i = 0; i < list.length; i++ ) {
+				if ( id == list[ i ]._id ) {
+					return i;
+				}
+			}
+
+			return false;
+
+		}
 	}
 }
 

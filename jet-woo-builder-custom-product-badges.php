@@ -19,7 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'JWB_CUSTOM_PRODUCT_BUDGES_VERSION', '1.1.0' );
 
 define( 'JWB_CUSTOM_PRODUCT_BUDGES__FILE__', __FILE__ );
-define( 'JWB_CUSTOM_PRODUCT_BUDGES_PLUGIN_BASE', plugin_basename( JWB_CUSTOM_PRODUCT_BUDGES__FILE__ ) );
 define( 'JWB_CUSTOM_PRODUCT_BUDGES_PATH', plugin_dir_path( JWB_CUSTOM_PRODUCT_BUDGES__FILE__ ) );
 define( 'JWB_CUSTOM_PRODUCT_BUDGES_URL', plugins_url( '/', JWB_CUSTOM_PRODUCT_BUDGES__FILE__ ) );
 
@@ -27,28 +26,32 @@ add_action( 'plugins_loaded', 'jwbcpb_plugin_init' );
 add_action( 'plugins_loaded', 'jwbcpb_load_plugin_textdomain' );
 
 /**
- * Required plugins loaded.
+ * Plugin init.
  *
- * Check if required plugins installed and activated.
+ * Plugin initialization with required plugins installed and activated check.
  *
  * @since  1.1.0
+ *
+ * @return void
  */
 function jwbcpb_plugin_init() {
 	if ( ! function_exists( 'jet_woo_builder' ) ) {
-		add_action( 'admin_notices', 'jwbcpb_admin_notice_missing_required_plugin' );
+		add_action( 'admin_notices', 'jwbcpb_required_plugins_admin_notice' );
 	} else {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/plugin.php';
 	}
 }
 
 /**
- * Admin notice.
+ * Required plugins admin notice.
  *
- * Show missing JetWooBuilder plugin notice.
+ * Show missing plugins admin notice.
  *
  * @since  1.1.0
+ *
+ * @return void
  */
-function jwbcpb_admin_notice_missing_required_plugin() {
+function jwbcpb_required_plugins_admin_notice() {
 
 	if ( isset( $_GET['activate'] ) ) {
 		unset( $_GET['activate'] );

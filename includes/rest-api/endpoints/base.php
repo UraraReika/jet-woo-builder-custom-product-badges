@@ -30,9 +30,27 @@ abstract class Base {
 	 *
 	 * @param object $request Request parameters.
 	 *
-	 * @return void
+	 * @return \WP_Error|\WP_HTTP_Response|\WP_REST_Response
 	 */
-	abstract function callback( $request );
+	public function callback( $request ) {
+
+		$data    = $request->get_params();
+		$settings = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
+
+		if ( is_wp_error( $settings ) ) {
+			return rest_ensure_response( [
+				'status'  => 'error',
+				'message' => __( 'Server Error.', 'jwb-custom-product-badges' ),
+			] );
+		}
+
+		foreach ( $data as $key => $value ) {
+			$settings[ $key ] = $value;
+		}
+
+		update_option( \JWB_CPB\Settings::get_instance()->key, $settings );
+
+	}
 
 	/**
 	 * Methods.

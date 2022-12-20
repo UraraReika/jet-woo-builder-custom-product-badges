@@ -50,7 +50,12 @@ class Rest_Api {
 
 		$this->_endpoints = [];
 
-		$this->register_endpoint( new Endpoints\Plugin_Settings() );
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/add-badges.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/delete-badges.php';
+
+		$this->register_endpoint( new Endpoints\Add_Badges() );
+		$this->register_endpoint( new Endpoints\Delete_Badges() );
 
 		do_action( 'jwb-custom-product-badges/rest/init-endpoints', $this );
 
@@ -95,7 +100,7 @@ class Rest_Api {
 	}
 
 	/**
-	 * Endpoints url.
+	 * Get endpoints url.
 	 *
 	 * Returns endpoints URLs list.
 	 *
@@ -119,7 +124,7 @@ class Rest_Api {
 	}
 
 	/**
-	 * Routes.
+	 * Get routes.
 	 *
 	 * Returns route to passed endpoint.
 	 *
@@ -173,6 +178,25 @@ class Rest_Api {
 			register_rest_route( $this->api_namespace, $route, $args );
 		}
 
+	}
+
+	/**
+	 * Get urls.
+	 *
+	 * Returns all registered Rest API URLs.
+	 *
+	 * @since  1.1.1
+	 * @access public
+	 *
+	 * @param bool $full Url type.
+	 *
+	 * @return array
+	 */
+	public function get_urls( $full = true ) {
+		return [
+			'add_badges'    => $this->get_route( 'add-badges', $full ),
+			'delete_badges' => $this->get_route( 'delete-badges', $full ),
+		];
 	}
 
 }

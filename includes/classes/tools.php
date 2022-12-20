@@ -102,12 +102,9 @@ class Tools {
 		$settings = get_option( Settings::get_instance()->key, [] );
 
 		return [
-			'settingsApiUrl' => get_rest_url() . 'jwb-custom-product-badges-api/v1/plugin-settings',
+			'settingsRestAPI' => Plugin::instance()->rest_api->get_urls(),
 			'settingsData'   => [
-				'badgesList' => $settings ? $settings['badgesList'] : [],
-				'actionType' => [
-					'value' => 'add',
-				],
+				'badgesList' => $settings['badgesList'] ?? [],
 			],
 		];
 

@@ -49,7 +49,7 @@ class Settings {
 
 		$this->subpage_modules = [
 			'jwb-custom-product-badges-general' => [
-				'class' => '\\JWB_CPB\\Settings\\General',
+				'class' => '\\JWB_CPB\\Settings\\Custom_Badges',
 				'args'  => [],
 			],
 		];
@@ -68,7 +68,7 @@ class Settings {
 	 */
 	public function init_settings_subpages() {
 
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/settings/subpages/general.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/settings/subpages/custom-badges.php';
 
 		foreach ( $this->subpage_modules as $subpage => $subpage_data ) {
 			\Jet_Dashboard\Dashboard::get_instance()->module_manager->register_subpage_module( $subpage, $subpage_data );

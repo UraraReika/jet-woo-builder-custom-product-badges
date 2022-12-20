@@ -39,6 +39,15 @@ class Plugin {
 	public $tools;
 
 	/**
+	 * Rest API.
+	 *
+	 * Holds rest API class instance.
+	 *
+	 * @var Rest_Api
+	 */
+	public $rest_api;
+
+	/**
 	 * Plugin constructor.
 	 *
 	 * Initializing JWB Custom Product Budges plugin.
@@ -90,21 +99,17 @@ class Plugin {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/meta-fields.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/widgets-integration.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/tools.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/hooks-handler.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/assets.php';
 
 		$this->tools = new Tools();
 
 		new Meta_Fields();
 		new Widgets_Integration();
-		new Hooks_Handler();
 		new Assets();
 
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/rest-api.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';
-		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/plugin-settings.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/manager.php';
 
-		new Rest_Api();
+		$this->rest_api = new Rest_Api();
 
 	}
 
@@ -168,8 +173,7 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	public function deactivation() {
-	}
+	public function deactivation() {}
 
 	/**
 	 * Instance.

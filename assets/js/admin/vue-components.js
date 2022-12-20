@@ -8,7 +8,8 @@ let JWBCPBSettingsMixin = {
 			preparedOptions: {},
 			savingStatus: false,
 			ajaxSaveHandler: null,
-			deleteBadgeTrigger: null
+			deleteBadgeTrigger: null,
+			endpoint: ''
 		};
 	},
 
@@ -52,7 +53,7 @@ let JWBCPBSettingsMixin = {
 						'label': this.inputBadge
 					} );
 
-					this.pageOptions.actionType['value'] = 'add';
+					this.endpoint = 'add_badges';
 					this.inputBadge = '';
 				} else {
 					this.$CXNotice.add( {
@@ -71,7 +72,7 @@ let JWBCPBSettingsMixin = {
 
 		deleteBadge: function ( value ) {
 			this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
-			this.pageOptions.actionType['value'] = 'remove';
+			this.endpoint = 'delete_badges';
 		},
 
 		saveOptions: function() {
@@ -82,7 +83,7 @@ let JWBCPBSettingsMixin = {
 
 			self.ajaxSaveHandler = jQuery.ajax( {
 				type: 'POST',
-				url: window.JWBCPBSettingsConfig.settingsApiUrl,
+				url: window.JWBCPBSettingsConfig.settingsRestAPI[ self.endpoint ],
 				dataType: 'json',
 				data: self.preparedOptions,
 				beforeSend: function() {

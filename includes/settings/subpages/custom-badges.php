@@ -2,14 +2,11 @@
 
 namespace JWB_CPB\Settings;
 
-use Jet_Dashboard\Base\Page_Module as Page_Module_Base;
-use Jet_Dashboard\Dashboard as Dashboard;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class General extends Page_Module_Base {
+class Custom_Badges extends \Jet_Dashboard\Base\Page_Module {
 
 	/**
 	 * Page slug.
@@ -68,9 +65,7 @@ class General extends Page_Module_Base {
 	}
 
 	/**
-	 * Page link.
-	 *
-	 * Returns page link.
+	 * Get page link.
 	 *
 	 * @access 1.1.0
 	 * @access public
@@ -78,11 +73,11 @@ class General extends Page_Module_Base {
 	 * @return string
 	 */
 	public function get_page_link() {
-		return Dashboard::get_instance()->get_dashboard_page_url( $this->get_parent_slug(), $this->get_page_slug() );
+		return \Jet_Dashboard\Dashboard::get_instance()->get_dashboard_page_url( $this->get_parent_slug(), $this->get_page_slug() );
 	}
 
 	/**
-	 * Enqueue assets.
+	 * Enqueue module assets.
 	 *
 	 * Enqueue module specific assets.
 	 *

@@ -34,6 +34,7 @@ class Assets {
 			[],
 			JWB_CUSTOM_PRODUCT_BUDGES_VERSION
 		);
+
 	}
 
 }

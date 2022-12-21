@@ -141,7 +141,7 @@ class Custom_Badges extends \Jet_Dashboard\Base\Page_Module {
 	 */
 	public function page_templates( $templates = [], $page = false, $subpage = false ) {
 
-		$templates['jwb-custom-product-badges-general'] = JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'templates/admin/general.php';
+		$templates['jwb-custom-product-badges-general'] = JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'templates/admin/custom-badges.php';
 
 		return $templates;
 

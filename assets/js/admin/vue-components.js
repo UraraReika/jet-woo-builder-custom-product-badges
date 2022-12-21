@@ -37,32 +37,37 @@ let JWBCPBSettingsMixin = {
 	methods: {
 		addNewBadge: function() {
 			if ( this.inputBadge.length > 0 ) {
+				const badgesToAdd = this.inputBadge.split(',');
 
-				let badgeValue = this.inputBadge.toLowerCase().replace( /\s/g, '-' ),
-					isValid = true;
+				for ( let badgeToAdd of badgesToAdd ) {
+					let badgeLabel = badgeToAdd.trim(),
+						badgeValue = badgeLabel.toLowerCase().replace( /\s/g, '-' ),
+						isValid = true;
 
-				for ( let badge of this.pageOptions.badgesList ) {
-					if ( badge.value === badgeValue ) {
-						isValid = false;
+					for ( let badge of this.pageOptions.badgesList ) {
+						if ( badge.value === badgeValue ) {
+							isValid = false;
+						}
 					}
-				}
 
-				if ( isValid ) {
+					if ( ! isValid ) {
+						this.$CXNotice.add( {
+							message: __( '`' + badgeLabel + '` badge already exist!', 'jwb-custom-product-badges' ),
+							type: 'error',
+							duration: 3000,
+						} );
+
+						continue;
+					}
+
 					this.pageOptions.badgesList.push( {
 						'value': badgeValue,
-						'label': this.inputBadge
-					} );
-
-					this.endpoint = 'add_badges';
-					this.inputBadge = '';
-				} else {
-					this.$CXNotice.add( {
-						message: __( 'This badge already exist!', 'jwb-custom-product-badges' ),
-						type: 'error',
-						duration: 3000,
+						'label': badgeLabel
 					} );
 				}
 
+				this.endpoint = 'add_badges';
+				this.inputBadge = '';
 			}
 		},
 

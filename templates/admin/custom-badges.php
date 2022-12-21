@@ -6,8 +6,11 @@
 			</h3>
 
 			<form class="jwb-custom-badges-add-form" @submit.prevent="addNewBadge">
-				<input type="text" v-model.trim="inputBadge"/>
-				<button type="submit">+ Add New</button>
+				<div class="cx-vui-component__control">
+					<input type="text" v-model.trim="inputBadge"/>
+					<button type="submit">+ Add New</button>
+				</div>
+				<div class="cx-vui-component__desc">To add multiple badges at once, separate the line with commas.</div>
 			</form>
 		</div>
 

@@ -31,74 +31,79 @@
 	}
 }
 
-.jet-woo-builder-settings-page__custom_badges {
-	.jwb-custom-product-badges {
-		&__head {
-			display: flex;
-			justify-content: space-between;
-			border-bottom: 1px solid #DCDCDD;
-			margin-bottom: 20px;
-			padding-bottom: 15px;
+.jwb-custom-product-badges {
+	&__head {
+		display: flex;
+		justify-content: space-between;
+		border-bottom: 1px solid #DCDCDD;
+		margin-bottom: 20px;
+		padding-bottom: 15px;
 
-			.jwb-custom-badges-add-form {
+		.jwb-custom-badges-add-form {
+			flex: 0 0 75%;
+			.cx-vui-component__control {
+				display: flex;
+				gap: 5px;
+
 				> * {
 					font-size: 13px;
 					line-height: 20px;
 					border-radius: 4px;
 					padding: 5px 15px;
 				}
+			}
 
-				input {
-					background-color: #F4F4F5;
-					color: #7B7E81;
-					border: none;
-					padding: 6px 15px;
+			input {
+				background-color: #F4F4F5;
+				color: #7B7E81;
+				border: none;
+				padding: 6px 15px;
+				flex: 1 0 auto;
 
-					&:focus {
-						box-shadow: 0 0 0 2px #80BDDC inset;
-						background-color: #FFFFFF;
-						color: #23282D;
-					}
-				}
-
-				button {
+				&:focus {
+					box-shadow: 0 0 0 2px #80BDDC inset;
 					background-color: #FFFFFF;
-					border: 1px solid #007CBA;
-					color: #007CBA;
-					cursor: pointer;
-					transition: all .15s ease;
-					font-weight: 500;
+					color: #23282D;
+				}
+			}
 
-					&:hover {
-						color: #066EA2;
-						border-color: #066EA2;
-					}
+			button {
+				background-color: #FFFFFF;
+				border: 1px solid #007CBA;
+				color: #007CBA;
+				cursor: pointer;
+				transition: all .15s ease;
+				font-weight: 500;
+
+				&:hover {
+					color: #066EA2;
+					border-color: #066EA2;
 				}
 			}
 		}
+	}
 
-		&-list {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 5px;
+	&-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
 
-			&-item {
-				@include list-item;
+		&-item {
+			@include list-item;
 
-				cursor: default;
+			cursor: default;
 
-				&__actions {
-					position: relative;
+			&__actions {
+				position: relative;
 
-					.cx-vui-tooltip {
-						left: 50%;
-						width: 110px;
-						box-sizing: border-box;
-						transform: translateX(-50%);
+				.cx-vui-tooltip {
+					left: 50%;
+					width: 110px;
+					box-sizing: border-box;
+					transform: translateX(-50%);
 
-						span {
-							cursor: pointer;
-						}
+					span {
+						cursor: pointer;
 					}
 				}
 			}
@@ -107,52 +112,14 @@
 }
 
 #jet-woo-builder-badge-settings {
-	.cx-control {
-		padding: 0;
+	.cx-control__content {
+		flex: 0 1 100%;
 
-		&__content {
-			flex: 0 1 100%;
+		.select2-selection__choice {
+			@include list-item;
 
-			.select2-selection__choice {
-				@include list-item;
-
-				flex-direction: row-reverse;
-				margin: 2px;
-			}
-		}
-	}
-}
-
-#select2-_jet_woo_builder_badges-results {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	right: 0;
-	border: 1px solid #80BDDC;
-	box-sizing: border-box;
-	box-shadow: 0 4px 20px rgb(35 40 45 / 24%);
-	border-radius: 0 0 4px 4px;
-	background: #FFFFFF;
-	margin: -1px 0 0 0;
-	padding: 10px 0;
-	z-index: 999;
-
-	.select2-results__option {
-		color: #7B7E81;
-		font-size: 13px;
-		line-height: 17px;
-		padding: 5px 10px;
-		cursor: pointer;
-		transition: all .15s ease;
-
-		&[data-selected=true]:not(.select2-results__option--highlighted) {
-			background: #EDF6FA;
-			color: #7B7E81;
-		}
-
-		&--highlighted {
-			background: #007CBA;
-			color: #FFFFFF;
+			flex-direction: row-reverse;
+			margin: 2px;
 		}
 	}
 }

@@ -90,9 +90,9 @@ class Plugin {
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/settings/manager.php';
 
 		if ( is_admin() ) {
-			new Settings();
-
 			require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/classes/db-upgrader.php';
+
+			new Settings();
 			new DB_Upgrader();
 		}
 

@@ -41,7 +41,7 @@ let JWBCPBSettingsMixin = {
 
 				for ( let badgeToAdd of badgesToAdd ) {
 					let badgeLabel = badgeToAdd.trim(),
-						badgeValue = badgeLabel.toLowerCase().replace( /\s/g, '-' ),
+						badgeValue = badgeLabel.toLowerCase().replace(/[`~!@#$%^&*()|+=?;:'".\\\/]/gi, '').replace( /\s/g, '-' ),
 						isValid = true;
 
 					for ( let badge of this.pageOptions.badgesList ) {

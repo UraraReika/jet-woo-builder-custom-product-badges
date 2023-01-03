@@ -52,9 +52,11 @@ class Rest_Api {
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/add-badges.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/badges-list.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/delete-badges.php';
 
 		$this->register_endpoint( new Endpoints\Add_Badges() );
+		$this->register_endpoint( new Endpoints\Badges_list() );
 		$this->register_endpoint( new Endpoints\Delete_Badges() );
 
 		do_action( 'jwb-custom-product-badges/rest/init-endpoints', $this );
@@ -195,6 +197,7 @@ class Rest_Api {
 	public function get_urls( $full = true ) {
 		return [
 			'add_badges'    => $this->get_route( 'add-badges', $full ),
+			'badges_list'   => $this->get_route( 'badges-list', $full ),
 			'delete_badges' => $this->get_route( 'delete-badges', $full ),
 		];
 	}

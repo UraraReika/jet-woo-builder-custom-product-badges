@@ -21,6 +21,20 @@ abstract class Base {
 	abstract function get_name();
 
 	/**
+	 * Methods.
+	 *
+	 * Returns endpoint request method - GET/POST/PUT/DELETE.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @return string
+	 */
+	public function get_method() {
+		return 'GET';
+	}
+
+	/**
 	 * Callback.
 	 *
 	 * API callback.
@@ -50,20 +64,6 @@ abstract class Base {
 
 		update_option( \JWB_CPB\Settings::get_instance()->key, $settings );
 
-	}
-
-	/**
-	 * Methods.
-	 *
-	 * Returns endpoint request method - GET/POST/PUT/DELETE.
-	 *
-	 * @since  1.1.0
-	 * @access public
-	 *
-	 * @return string
-	 */
-	public function get_method() {
-		return 'GET';
 	}
 
 	/**

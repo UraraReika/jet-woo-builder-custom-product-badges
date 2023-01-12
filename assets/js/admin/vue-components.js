@@ -4,6 +4,7 @@ let JWBCPBSettingsMixin = {
 	data: function() {
 		return {
 			pageOptions: window.JWBCPBSettingsConfig.settingsData,
+			conditionsOptions: window.JWBCPBSettingsConfig.settingsConditionsData,
 			inputBadge: '',
 			preparedOptions: {},
 			savingStatus: false,
@@ -78,6 +79,40 @@ let JWBCPBSettingsMixin = {
 		deleteBadge: function ( value ) {
 			this.pageOptions.badgesList = this.pageOptions.badgesList.filter( badge => badge.value !== value );
 			this.endpoint = 'delete_badges';
+		},
+
+		addNewField: function( item ) {
+			item._id = Math.round( Math.random() * 1000000 );
+
+			this.pageOptions.displayConditions.push( item );
+			this.endpoint = 'add_condition';
+		},
+
+		setFieldProp: function( index, key, value ) {
+			let field = this.pageOptions.displayConditions[ index ];
+
+			field[ key ] = value;
+
+			this.pageOptions.displayConditions.splice( index, 1, field );
+			this.endpoint = 'update_condition';
+		},
+
+		cloneField: function( index) {
+			let field = JSON.parse( JSON.stringify( this.pageOptions.displayConditions[ index ] ) );
+
+			field._id = Math.round( Math.random() * 1000000 );
+
+			this.pageOptions.displayConditions.splice( index + 1, 0, field );
+			this.endpoint = 'add_condition';
+		},
+
+		deleteField: function( index ) {
+			this.pageOptions.displayConditions.splice( index, 1 );
+			this.endpoint = 'delete_condition';
+		},
+
+		isCollapsed: function( parent ) {
+			return undefined === parent.collapsed || true === parent.collapsed || 'true' === parent.collapsed;
 		},
 
 		saveOptions: function() {

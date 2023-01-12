@@ -52,12 +52,18 @@ class Rest_Api {
 
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/base.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/add-badges.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/add-condition.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/badges-list.php';
 		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/delete-badges.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/delete-condition.php';
+		require JWB_CUSTOM_PRODUCT_BUDGES_PATH . 'includes/rest-api/endpoints/update-condition.php';
 
 		$this->register_endpoint( new Endpoints\Add_Badges() );
+		$this->register_endpoint( new Endpoints\Add_Condition() );
 		$this->register_endpoint( new Endpoints\Badges_list() );
 		$this->register_endpoint( new Endpoints\Delete_Badges() );
+		$this->register_endpoint( new Endpoints\Delete_Condition() );
+		$this->register_endpoint( new Endpoints\Update_Condition() );
 
 		do_action( 'jwb-custom-product-badges/rest/init-endpoints', $this );
 
@@ -196,9 +202,12 @@ class Rest_Api {
 	 */
 	public function get_urls( $full = true ) {
 		return [
-			'add_badges'    => $this->get_route( 'add-badges', $full ),
-			'badges_list'   => $this->get_route( 'badges-list', $full ),
-			'delete_badges' => $this->get_route( 'delete-badges', $full ),
+			'add_badges'       => $this->get_route( 'add-badges', $full ),
+			'add_condition'    => $this->get_route( 'add-condition', $full ),
+			'badges_list'      => $this->get_route( 'badges-list', $full ),
+			'delete_badges'    => $this->get_route( 'delete-badges', $full ),
+			'delete_condition' => $this->get_route( 'delete-condition', $full ),
+			'update_condition' => $this->get_route( 'update-condition', $full ),
 		];
 	}
 

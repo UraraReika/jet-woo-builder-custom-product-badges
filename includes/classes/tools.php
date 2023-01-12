@@ -88,12 +88,55 @@ class Tools {
 	}
 
 	/**
+	 * Get products list.
+	 *
+	 * Returns list of products for settings page usage.
+	 *
+	 * @since  1.3.0
+	 * @access public
+	 *
+	 * @return array
+	 */
+	public function get_products_list() {
+
+		$posts = get_posts( [
+			'post_type'           => 'product',
+			'ignore_sticky_posts' => true,
+			'posts_per_page'      => -1,
+			'suppress_filters'    => false,
+			'post_status'         => [ 'publish', 'private' ],
+		] );
+
+		$result = [];
+
+		if ( empty( $ids ) || in_array( 'all', $ids ) ) {
+			$result[] = [
+				'value' => 'all',
+				'label' => __( 'All', 'jwb-custom-product-badges' ),
+			];
+		}
+
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				$result[] = [
+					'value' => $post->ID,
+					'label' => $post->post_title,
+				];
+			}
+		}
+
+		return $result;
+
+	}
+
+	/**
 	 * Localize data.
 	 *
 	 * Returns plugins settings localized data list.
 	 *
-	 * @since 1.1.0
-	 * @since public
+	 * @since   1.1.0
+	 * @since   1.3.0 Added new parameters.
+	 * @access  public
 	 *
 	 * @return array
 	 */
@@ -102,9 +145,13 @@ class Tools {
 		$settings = get_option( Settings::get_instance()->key, [] );
 
 		return [
-			'settingsRestAPI' => Plugin::instance()->rest_api->get_urls(),
-			'settingsData'   => [
-				'badgesList' => $settings['badgesList'] ?? [],
+			'settingsRestAPI'        => Plugin::instance()->rest_api->get_urls(),
+			'settingsData'           => [
+				'badgesList'        => $settings['badgesList'] ?? [],
+				'displayConditions' => $settings['displayConditions'] ?? [],
+			],
+			'settingsConditionsData' => [
+				'productsList' => $this->get_products_list(),
 			],
 		];
 

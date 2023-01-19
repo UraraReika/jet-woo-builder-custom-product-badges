@@ -17,7 +17,7 @@
 			</form>
 		</div>
 
-		<div class="jwb-custom-product-badges__body">
+		<div class="jwb-custom-product-badges__body" v-if="pageOptions.badgesList.length > 0">
 			<ul class="jwb-custom-product-badges-list">
 				<li class="jwb-custom-product-badges-list-item" v-for="( badge, index ) in pageOptions.badgesList">
 					{{ badge.label }}

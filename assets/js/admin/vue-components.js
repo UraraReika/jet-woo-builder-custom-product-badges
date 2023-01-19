@@ -141,6 +141,12 @@ let JWBCPBSettingsMixin = {
 							type: 'success',
 							duration: 3000,
 						} );
+
+						if ( response?.reload ) {
+							setTimeout( function () {
+								location.reload( true );
+							}, 3000 );
+						}
 					}
 
 					if ( 'error' === response.status ) {

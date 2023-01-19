@@ -35,7 +35,6 @@
 	&__head {
 		display: flex;
 		justify-content: space-between;
-		border-bottom: 1px solid #DCDCDD;
 		margin-bottom: 20px;
 		padding-bottom: 15px;
 
@@ -84,6 +83,8 @@
 	}
 
 	&__body {
+		border-top: 1px solid #DCDCDD;
+
 		h3 {
 			border-bottom: 1px solid #DCDCDD;
 			margin-bottom: 20px;
@@ -115,6 +116,11 @@
 					}
 				}
 			}
+		}
+
+		.cx-vui-f-select__results {
+			max-height: 135px;
+			overflow: auto;
 		}
 	}
 }

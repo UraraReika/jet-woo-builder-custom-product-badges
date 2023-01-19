@@ -58,11 +58,7 @@ abstract class Base {
 			] );
 		}
 
-		foreach ( $data as $key => $value ) {
-			$settings[ $key ] = $value;
-		}
-
-		update_option( \JWB_CPB\Settings::get_instance()->key, $settings );
+		update_option( \JWB_CPB\Settings::get_instance()->key, $data );
 
 	}
 

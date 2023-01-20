@@ -30,7 +30,7 @@ class Delete_Badges extends Base {
 
 		if ( isset( $settings['displayConditions'] ) ) {
 			foreach ( $settings['displayConditions'] as $key => $value ) {
-				$condition_badges = $value['badges'];
+				$condition_badges = $value['badges'] ?? [];
 
 				if ( empty( $condition_badges ) ) {
 					continue;

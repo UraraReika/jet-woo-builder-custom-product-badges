@@ -108,6 +108,7 @@ let JWBCPBSettingsMixin = {
 		},
 
 		deleteField: function( index ) {
+			this.pageOptions.processedCondition = this.pageOptions.displayConditions[ index ]._id;
 			this.pageOptions.displayConditions.splice( index, 1 );
 			this.endpoint = 'delete_condition';
 		},

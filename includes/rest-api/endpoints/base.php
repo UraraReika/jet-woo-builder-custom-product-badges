@@ -48,10 +48,9 @@ abstract class Base {
 	 */
 	public function callback( $request ) {
 
-		$data    = $request->get_params();
-		$settings = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
+		$data = $request->get_params();
 
-		if ( is_wp_error( $settings ) ) {
+		if ( is_wp_error( $data ) ) {
 			return rest_ensure_response( [
 				'status'  => 'error',
 				'message' => __( 'Server Error.', 'jwb-custom-product-badges' ),

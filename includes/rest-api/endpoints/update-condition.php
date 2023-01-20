@@ -25,7 +25,9 @@ class Update_Condition extends Base {
 		$data = $request->get_params();
 
 		foreach ( $data['displayConditions'] as $condition ) {
-			$this->handle_products_badges_meta( $condition );
+			if ( $data['processedCondition'] === $condition['_id'] ) {
+				$this->handle_products_badges_meta( $condition );
+			}
 		}
 
 		return rest_ensure_response( [
@@ -54,10 +56,12 @@ class Update_Condition extends Base {
 			'numberposts' => -1,
 		];
 
+		$condition_value = $condition['value'] ?? [];
+
 		switch ( $condition['parameter'] ) {
 			case 'products':
-				$condition_products = get_posts( array_merge( $args, [ 'include' => $condition['value'] ] ) );
-				$products           = get_posts( array_merge( $args, [ 'exclude' => $condition['value'] ] ) );
+				$condition_products = get_posts( array_merge( $args, [ 'include' => $condition_value ] ) );
+				$products           = get_posts( array_merge( $args, [ 'exclude' => $condition_value ] ) );
 				$include            = 'equal' === $condition['operator'];
 
 				$this->update_products_badges_meta( $condition_products, $condition, $include );
@@ -86,14 +90,17 @@ class Update_Condition extends Base {
 	 * @return void
 	 */
 	public function update_products_badges_meta( $products, $condition, $include ) {
+
+		$condition_badges = $condition['badges'] ?? [];
+
 		foreach ( $products as $product ) {
 			$badge_meta = get_post_meta( $product->ID, '_jet_woo_builder_badges', true );
 
 			if ( $include ) {
 				if ( empty( $badge_meta ) ) {
-					$badge_meta = $condition['badges'];
+					$badge_meta = $condition_badges;
 				} else {
-					$badge_meta = array_unique( array_merge( $badge_meta, $condition['badges'] ) );
+					$badge_meta = array_unique( array_merge( $badge_meta, $condition_badges ) );
 				}
 			} else {
 				if ( empty( $badge_meta ) ) {
@@ -101,7 +108,7 @@ class Update_Condition extends Base {
 				}
 
 				foreach ( $badge_meta as $key => $value ) {
-					if ( in_array( $value, $condition['badges'] ) ) {
+					if ( in_array( $value, $condition_badges ) ) {
 						unset( $badge_meta[ $key ] );
 					}
 				}
@@ -109,6 +116,7 @@ class Update_Condition extends Base {
 
 			update_post_meta( $product->ID, '_jet_woo_builder_badges', $badge_meta );
 		}
+
 	}
 
 }

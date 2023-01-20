@@ -147,8 +147,9 @@ class Tools {
 		return [
 			'settingsRestAPI'        => Plugin::instance()->rest_api->get_urls(),
 			'settingsData'           => [
-				'badgesList'        => $settings['badgesList'] ?? [],
-				'displayConditions' => $settings['displayConditions'] ?? [],
+				'badgesList'         => $settings['badgesList'] ?? [],
+				'displayConditions'  => $settings['displayConditions'] ?? [],
+				'processedCondition' => '',
 			],
 			'settingsConditionsData' => [
 				'productsList' => $this->get_products_list(),

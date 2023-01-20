@@ -94,6 +94,7 @@ let JWBCPBSettingsMixin = {
 			field[ key ] = value;
 
 			this.pageOptions.displayConditions.splice( index, 1, field );
+			this.pageOptions.processedCondition = field._id;
 			this.endpoint = 'update_condition';
 		},
 

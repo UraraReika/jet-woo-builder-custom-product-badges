@@ -62,6 +62,57 @@ abstract class Base {
 	}
 
 	/**
+	 * Update products badges meta.
+	 *
+	 * @since  1.3.0
+	 * @access public
+	 *
+	 * @param array $args   List of additional products arguments.
+	 * @param array $badges List of badges.
+	 * @param bool  $set    Handle type.
+	 *
+	 * @return void
+	 */
+	public function update_products_badges_meta( $args, $badges, $set ) {
+
+		$default_args = [
+			'post_type'   => 'product',
+			'numberposts' => -1,
+		];
+
+		if ( ! empty( $args ) ) {
+			$default_args = array_merge( $default_args, $args );
+		}
+
+		$products = get_posts( $default_args );
+
+		if ( ! $products ) {
+			return;
+		}
+
+		foreach ( $products as $product ) {
+			$badge_meta = get_post_meta( $product->ID, '_jet_woo_builder_badges', true );
+
+			if ( $set ) {
+				$badge_meta = empty( $badge_meta ) ? $badges : array_unique( array_merge( $badge_meta, $badges ) );
+			} else {
+				if ( empty( $badge_meta ) ) {
+					continue;
+				}
+
+				foreach ( $badge_meta as $key => $value ) {
+					if ( in_array( $value, $badges ) ) {
+						unset( $badge_meta[ $key ] );
+					}
+				}
+			}
+
+			update_post_meta( $product->ID, '_jet_woo_builder_badges', $badge_meta );
+		}
+
+	}
+
+	/**
 	 * Permission callback.
 	 *
 	 * Check user access to current end-point.

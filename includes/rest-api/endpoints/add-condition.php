@@ -25,7 +25,6 @@ class Add_Condition extends Base {
 			'message' => __( 'Condition has been saved.', 'jwb-custom-product-badges' ),
 		] );
 
-
 	}
 
 }

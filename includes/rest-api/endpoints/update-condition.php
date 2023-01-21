@@ -20,15 +20,24 @@ class Update_Condition extends Base {
 
 	public function callback( $request ) {
 
-		parent::callback( $request );
-
 		$data = $request->get_params();
 
-		foreach ( $data['displayConditions'] as $condition ) {
+		if ( is_wp_error( $data ) ) {
+			return rest_ensure_response( [
+				'status'  => 'error',
+				'message' => __( 'Server Error.', 'jwb-custom-product-badges' ),
+			] );
+		}
+
+		$settings = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
+
+		foreach ( $data['displayConditions'] as $key => $condition ) {
 			if ( $data['processedCondition'] === $condition['_id'] ) {
-				$this->handle_products_badges_meta( $condition );
+				$this->handle_products_badges_meta( $condition, $settings['displayConditions'][ $key ] );
 			}
 		}
+
+		update_option( \JWB_CPB\Settings::get_instance()->key, $data );
 
 		return rest_ensure_response( [
 			'status'  => 'success',
@@ -45,27 +54,57 @@ class Update_Condition extends Base {
 	 * @since  1.3.0
 	 * @access public
 	 *
-	 * @param array $condition Currently handling condition.
+	 * @param array $condition       Currently handling condition.
+	 * @param array $stored_condiion Stored handling.
 	 *
 	 * @return void
 	 */
-	public function handle_products_badges_meta( $condition ) {
+	public function handle_products_badges_meta( $condition, $stored_condiion ) {
 
-		$args = [
-			'post_type'   => 'product',
-			'numberposts' => -1,
-		];
+		$set             = true;
+		$badges          = $condition['badges'] ?? [];
+		$operator        = $condition['operator'] ?? 'equal';
+		$value           = $condition['value'] ?? [];
+		$stored_badges   = $stored_condiion['badges'] ?? [];
+		$stored_operator = $stored_condiion['operator'] ?? 'equal';
+		$stored_value    = $stored_condiion['value'] ?? [];
 
-		$condition_value = $condition['value'] ?? [];
+		$updated_badge = $this->get_updated_value( $badges, $stored_badges );
+
+		if ( ! empty( $updated_badge ) && count( $badges ) < count( $stored_badges ) ) {
+			$set    = false;
+			$badges = $updated_badge;
+		}
+
+		$updated_value = $this->get_updated_value( $value, $stored_value );
+
+		if ( ! empty( $updated_value ) && count( $value ) < count( $stored_value ) ) {
+			$set   = false;
+			$value = $updated_value;
+		}
+
+		if ( empty( $value ) ) {
+			return;
+		}
+
+		$operatorSwitched = $operator !== $stored_operator;
 
 		switch ( $condition['parameter'] ) {
 			case 'products':
-				$condition_products = get_posts( array_merge( $args, [ 'include' => $condition_value ] ) );
-				$products           = get_posts( array_merge( $args, [ 'exclude' => $condition_value ] ) );
-				$include            = 'equal' === $condition['operator'];
+				$is_equal = 'equal' === $operator;
 
-				$this->update_products_badges_meta( $condition_products, $condition, $include );
-				$this->update_products_badges_meta( $products, $condition, ! $include );
+				if ( $is_equal ) {
+					$args['include'] = $value;
+				} else {
+					$args['exclude'] = $value;
+				}
+
+				if ( ! $operatorSwitched ) {
+					$this->update_products_badges_meta( $args, $badges, $set );
+				} else {
+					$this->update_products_badges_meta( [ 'include' => $value ], $badges, $is_equal );
+					$this->update_products_badges_meta( [ 'exclude' => $value ], $badges, ! $is_equal );
+				}
 
 				break;
 
@@ -76,46 +115,23 @@ class Update_Condition extends Base {
 	}
 
 	/**
-	 * Update products badges meta.
+	 * Get updated value.
 	 *
-	 * Updates products badges meta depending on operator.
+	 * Return list of difference in values.
 	 *
 	 * @since  1.3.0
 	 * @access public
 	 *
-	 * @param array $products  List of products.
-	 * @param array $condition Currently handling condition.
-	 * @param bool  $include   Update status.
+	 * @param array $value        Request value.
+	 * @param array $stored_value Stored settings value.
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function update_products_badges_meta( $products, $condition, $include ) {
+	public function get_updated_value( $value, $stored_value ) {
 
-		$condition_badges = $condition['badges'] ?? [];
+		$intersected_value = array_intersect( $value, $stored_value );
 
-		foreach ( $products as $product ) {
-			$badge_meta = get_post_meta( $product->ID, '_jet_woo_builder_badges', true );
-
-			if ( $include ) {
-				if ( empty( $badge_meta ) ) {
-					$badge_meta = $condition_badges;
-				} else {
-					$badge_meta = array_unique( array_merge( $badge_meta, $condition_badges ) );
-				}
-			} else {
-				if ( empty( $badge_meta ) ) {
-					continue;
-				}
-
-				foreach ( $badge_meta as $key => $value ) {
-					if ( in_array( $value, $condition_badges ) ) {
-						unset( $badge_meta[ $key ] );
-					}
-				}
-			}
-
-			update_post_meta( $product->ID, '_jet_woo_builder_badges', $badge_meta );
-		}
+		return array_merge( array_diff( $value, $intersected_value ), array_diff( $stored_value, $intersected_value ) );
 
 	}
 

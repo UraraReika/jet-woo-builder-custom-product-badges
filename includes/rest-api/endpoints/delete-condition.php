@@ -18,8 +18,7 @@ class Delete_Condition extends Base {
 
 	public function callback( $request ) {
 
-		$data     = $request->get_params();
-		$settings = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
+		$data = $request->get_params();
 
 		if ( is_wp_error( $data ) ) {
 			return rest_ensure_response( [
@@ -28,6 +27,7 @@ class Delete_Condition extends Base {
 			] );
 		}
 
+		$settings         = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
 		$condition_badges = [];
 
 		foreach ( $settings['displayConditions'] as $condition ) {
@@ -37,26 +37,7 @@ class Delete_Condition extends Base {
 		}
 
 		if ( ! empty( $condition_badges ) ) {
-			$products = get_posts( [
-				'post_type'   => 'product',
-				'numberposts' => -1,
-			] );
-
-			foreach ( $products as $product ) {
-				$badge_meta = get_post_meta( $product->ID, '_jet_woo_builder_badges', true );
-
-				if ( empty( $badge_meta ) ) {
-					continue;
-				}
-
-				foreach ( $badge_meta as $key => $value ) {
-					if ( in_array( $value, $condition_badges ) ) {
-						unset( $badge_meta[ $key ] );
-					}
-				}
-
-				update_post_meta( $product->ID, '_jet_woo_builder_badges', $badge_meta );
-			}
+			$this->update_products_badges_meta( [], $condition_badges, false );
 		}
 
 		update_option( \JWB_CPB\Settings::get_instance()->key, $data );

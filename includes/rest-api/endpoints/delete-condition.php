@@ -27,17 +27,12 @@ class Delete_Condition extends Base {
 			] );
 		}
 
-		$settings         = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
-		$condition_badges = [];
+		$settings = get_option( \JWB_CPB\Settings::get_instance()->key, [] );
 
 		foreach ( $settings['displayConditions'] as $condition ) {
 			if ( $data['processedCondition'] === $condition['_id'] ) {
-				$condition_badges = $condition['badges'] ?? [];
+				$this->handle_products_badges_meta( $condition );
 			}
-		}
-
-		if ( ! empty( $condition_badges ) ) {
-			$this->update_products_badges_meta( [], $condition_badges, false );
 		}
 
 		update_option( \JWB_CPB\Settings::get_instance()->key, $data );
@@ -46,6 +41,46 @@ class Delete_Condition extends Base {
 			'status'  => 'success',
 			'message' => __( 'Condition has been deleted.', 'jwb-custom-product-badges' ),
 		] );
+
+	}
+
+	/**
+	 * Handle products badge meta.
+	 *
+	 * Handle products badges meta for different types of parameter.
+	 *
+	 * @since  1.3.0
+	 * @access public
+	 *
+	 * @param array $condition Currently handling condition.
+	 *
+	 * @return void
+	 */
+	public function handle_products_badges_meta( $condition ) {
+
+		$badges   = $condition['badges'] ?? [];
+		$operator = $condition['operator'] ?? 'equal';
+		$value    = $condition['value'] ?? [];
+
+		if ( empty( $value ) ) {
+			return;
+		}
+
+		switch ( $condition['parameter'] ) {
+			case 'products':
+				if ( 'equal' === $operator ) {
+					$args['include'] = $value;
+				} else {
+					$args['exclude'] = $value;
+				}
+
+				$this->update_products_badges_meta( $args, $badges, false );
+
+				break;
+
+			default:
+				break;
+		}
 
 	}
 

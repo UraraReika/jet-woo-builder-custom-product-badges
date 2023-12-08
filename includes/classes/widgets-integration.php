@@ -230,11 +230,11 @@ class Widgets_Integration {
 			return $status;
 		}
 
-		if ( ! isset( $settings['enable_custom_badges'] ) && ! filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) ) {
-			return $status;
+		if ( isset( $settings['enable_custom_badges'] ) && filter_var( $settings['enable_custom_badges'], FILTER_VALIDATE_BOOLEAN ) ) {
+			return true;
 		}
 
-		return true;
+		return $status;
 
 	}
 
